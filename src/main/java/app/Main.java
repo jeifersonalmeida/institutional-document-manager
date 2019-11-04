@@ -10,7 +10,7 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/screens/documents/DocumentsScreen.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/screens.main/main.fxml"));
     primaryStage.setTitle("Institutional Document Manager");
     primaryStage.setScene(new Scene(root));
     primaryStage.setMaximized(true);
