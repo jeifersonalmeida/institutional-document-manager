@@ -1,15 +1,9 @@
 package app.models;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class PublicServant {
 
     private String id;
     private String name;
-
-    private List<Ordinance> ordinances = new ArrayList<>();
 
     public PublicServant(String id, String name) {
         this.setId(id);
@@ -30,15 +24,6 @@ public class PublicServant {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Iterator<Ordinance> getOrdinances() {
-        return ordinances.iterator();
-    }
-
-    public void addOrdinance(Ordinance ordinance) {
-        ordinance.addPublicServant(this);
-        this.ordinances.add(ordinance);
     }
 
     public double getTotalWorkload() {
