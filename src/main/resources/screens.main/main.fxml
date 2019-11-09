@@ -41,7 +41,7 @@
          </VBox.margin>
          <children>
             <Button mnemonicParsing="false" text="Documents" />
-            <Button mnemonicParsing="false" text="Servants" />
+            <Button fx:id="btnServants" mnemonicParsing="false" text="Servants" />
          </children>
       </HBox>
       <HBox fx:id="mainHBox" alignment="CENTER" prefHeight="477.0" prefWidth="1020.0" VBox.vgrow="ALWAYS">
