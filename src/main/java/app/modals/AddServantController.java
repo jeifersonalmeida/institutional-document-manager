@@ -27,7 +27,6 @@ public class AddServantController {
   @FXML
   public void buttonAdd_click() {
     if(!(this.textFieldName.getText().equals("") || this.textFieldRecord.getText().equals(""))){
-      System.out.println("-->" + this.textFieldName.getText() + this.textFieldRecord.getText() + "<--");
       this.parentController.addPublicServant(new PublicServant(this.textFieldRecord.getText(), this.textFieldName.getText()));
     }
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
@@ -36,12 +35,11 @@ public class AddServantController {
 
   @FXML
   public void buttonSave_click() {
-    if (!textFieldRecord.getText().equals("")) {
+    if (!(textFieldRecord.getText().equals("") || textFieldName.getText().equals(""))) {
       this.servant.setId(textFieldRecord.getText());
-    }
-    if (!textFieldName.getText().equals("")) {
       this.servant.setName(textFieldName.getText());
     }
+
     this.parentController.refreshList();
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
     stage.close();
@@ -49,6 +47,7 @@ public class AddServantController {
 
   @FXML
   public void buttonRemove_click() {
+    this.parentController.removePublicServant(this.textFieldRecord.getText());
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
     stage.close();
   }

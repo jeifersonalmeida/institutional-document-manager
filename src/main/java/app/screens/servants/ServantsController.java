@@ -147,4 +147,14 @@ public class ServantsController {
         this.publicServants.add(publicServant);
         this.refreshList();
     }
+
+    public void removePublicServant(PublicServant publicServant){
+        this.publicServants.remove(publicServant);
+        this.refreshList();
+    }
+
+    public void removePublicServant(String id){
+        this.publicServants.removeIf(p -> p.getId().equals(id));
+        this.refreshList();
+    }
 }
