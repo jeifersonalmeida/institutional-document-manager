@@ -157,4 +157,17 @@ public class ServantsController {
         this.publicServants.removeIf(p -> p.getId().equals(id));
         this.refreshList();
     }
+
+    @FXML
+    public void filter(){
+        String filterString = this.textFieldSearchbar.getText();
+        System.out.println(filterString);
+
+        if(!filterString.equals("")){
+            this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getId().contains(filterString) || p.getName().contains(filterString)));
+            this.refreshList();
+            return;
+        }
+        this.tableViewServants.setItems(this.publicServants);
+    }
 }

@@ -15,7 +15,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <TextField fx:id="textFieldSearchbar" layoutX="14.0" layoutY="14.0" promptText="Search" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+        <TextField fx:id="textFieldSearchbar" layoutX="14.0" layoutY="14.0" onKeyReleased="#filter" promptText="Search" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
         <HBox alignment="CENTER" layoutX="120.0" layoutY="343.0" prefHeight="43.0" prefWidth="361.0" spacing="15.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="119.0">
             <children>
                 <Button fx:id="buttonSingleReport" mnemonicParsing="false" onAction="#buttonSingleReport_click" text="Report - Selected" />
