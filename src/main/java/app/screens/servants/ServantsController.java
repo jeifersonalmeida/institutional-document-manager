@@ -70,7 +70,11 @@ public class ServantsController {
     @FXML
     public void buttonAddNew_click() throws IOException {
         Stage dialog = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource(addServantPath));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(addServantPath));
+        Parent root = loader.load();
+
+        AddServantController controller = loader.getController();
+        controller.setParentController(this);
         dialog.setTitle("Add servant");
         dialog.setScene(new Scene(root));
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -88,6 +92,7 @@ public class ServantsController {
 
             AddServantController controller = loader.getController();
             controller.setServant(servant);
+            controller.setParentController(this);
 
             Stage dialog = new Stage();
             dialog.setTitle("Edit servant");
@@ -132,5 +137,14 @@ public class ServantsController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
         dialog.showAndWait();
+    }
+
+    public void refreshList(){
+        this.tableViewServants.refresh();
+    }
+
+    public void addPublicServant(PublicServant publicServant){
+        this.publicServants.add(publicServant);
+        this.refreshList();
     }
 }
