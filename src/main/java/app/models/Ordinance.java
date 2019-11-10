@@ -1,63 +1,59 @@
 package app.models;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 public class Ordinance extends Document {
-    private double workload;
-    private Date startingDate;
-    private Date finishingDate;
-    private OrdinanceType type;
-    private List<PublicServant> publicServants;
 
-    public Ordinance(Date startingDate, Date finishingDate, double workload, OrdinanceType type, String subject) {
-        setStartingDate(startingDate);
-        setFinishingDate(finishingDate);
-        setType(type);
-        setWorkload(workload);
-        setSubject(subject);
-    }
+  private double workload;
+  private Date startingDate;
+  private Date finishingDate;
+  private OrdinanceType type;
 
-    public double getWorkload() {
-        return workload;
-    }
+  public Ordinance() {}
 
-    public void setWorkload(double workload) {
-        this.workload = workload;
-    }
+  public Ordinance(
+      Date startingDate,
+      Date finishingDate,
+      double workload,
+      OrdinanceType type,
+      String subject) {
+    setStartingDate(startingDate);
+    setFinishingDate(finishingDate);
+    setType(type);
+    setWorkload(workload);
+    setSubject(subject);
+  }
 
-    public Date getStartingDate() {
-        return startingDate;
-    }
+  public double getWorkload() {
+    return workload;
+  }
 
-    public void setStartingDate(Date startingDate) {
-        this.startingDate = startingDate;
-    }
+  public void setWorkload(double workload) {
+    this.workload = workload;
+  }
 
-    public Date getFinishingDate() {
-        return finishingDate;
-    }
+  public Date getStartingDate() {
+    return startingDate;
+  }
 
-    public void setFinishingDate(Date finishingDate) {
-        this.finishingDate = finishingDate;
-    }
+  public void setStartingDate(Date startingDate) {
+    this.startingDate = startingDate;
+  }
 
-    public OrdinanceType getType() {
-        return type;
-    }
+  public Date getFinishingDate() {
+    return finishingDate;
+  }
 
-    public void setType(OrdinanceType type) {
-        this.type = type;
-    }
+  public void setFinishingDate(Date finishingDate) {
+    this.finishingDate = finishingDate;
+  }
 
-    public Iterator<PublicServant> getPublicServants() {
-        return publicServants.iterator();
-    }
+  public OrdinanceType getType() {
+    return type;
+  }
 
-    public void addPublicServant(PublicServant publicServant) {
-        publicServant.addOrdinance(this);
-        this.publicServants.add(publicServant);
-    }
+  public void setType(OrdinanceType type) {
+    this.type = type;
+  }
 
 }

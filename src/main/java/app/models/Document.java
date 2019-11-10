@@ -3,6 +3,7 @@ package app.models;
 import java.util.Date;
 
 public abstract class Document {
+
     private String number;
     private Date publicationDate;
     private String subject;
