@@ -4,7 +4,6 @@ import app.modals.AddServantController;
 import app.models.PublicServant;
 import app.screens.generalWorkloadReport.GeneralReportController;
 import app.screens.singleWorkloadReport.SingleReportController;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,7 +36,7 @@ public class ServantsController {
     @FXML
     private Button buttonAddNew, buttonEdit, buttonSingleReport, buttonGeneralReport;
 
-    private String addServantPath = "/modals.addServant/AddServantModal.fxml";
+    private String addServantPath = "/modals/addServant/AddServantModal.fxml";
 
     @FXML
     private void initialize() {
@@ -108,7 +107,7 @@ public class ServantsController {
         PublicServant servant = tableViewServants.getSelectionModel().getSelectedItem();
 
         if (servant != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens.singleWorkloadReport/SingleReport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/singleWorkloadReport/SingleReport.fxml"));
             Parent root = loader.load();
 
             SingleReportController controller = loader.getController();
@@ -125,7 +124,7 @@ public class ServantsController {
 
     @FXML
     public void buttonGeneralReport_click() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens.generalWorkloadReport/GeneralReport.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
 
         GeneralReportController controller = loader.getController();

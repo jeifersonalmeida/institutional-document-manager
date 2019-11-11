@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="340.0" styleClass="container" stylesheets="@ManageDocument.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.modals.manageDocument.ManageDocumentController">
+   <children>
+      <VBox prefHeight="0.0" prefWidth="580.0">
+         <children>
+            <Label text="Tipo do documento" textFill="#dddddd">
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="selectDocumentType" onAction="#changeSelectHandler" prefHeight="26.0" prefWidth="336.0">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </ComboBox>
+         </children>
+      </VBox>
+      <VBox fx:id="ctnServants" disable="true" layoutX="20.0" layoutY="20.0" prefHeight="153.0" prefWidth="320.0">
+         <children>
+            <Label text="Servidores" textFill="#dddddd">
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewServants" prefWidth="320.0">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </ListView>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="529.0" text="Adicionar Servidor">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox fx:id="ctnIndex" layoutX="20.0" layoutY="20.0" prefHeight="0.0" prefWidth="580.0">
+         <children>
+            <Label text="Índice" textFill="#dddddd">
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fieldDocumentIndex" promptText="Digite o índice">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="9.0" prefWidth="320.0">
+         <children>
+            <Button fx:id="bttSelectFile" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" text="Selecionar Documento" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="bttAdd" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Adicionar" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Ubuntu Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
