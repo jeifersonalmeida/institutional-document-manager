@@ -14,11 +14,16 @@ import java.io.IOException;
 
 public class DocumentCellController extends ListCell<Document> {
 
-  @FXML private ImageView type;
-  @FXML private Label subject;
-  @FXML private Label publishDate;
-  @FXML private Label status;
-  @FXML private ImageView view;
+  @FXML
+  private ImageView type;
+  @FXML
+  private Label subject;
+  @FXML
+  private Label publishDate;
+  @FXML
+  private Label status;
+  @FXML
+  private ImageView view;
 
   public DocumentCellController() {
     loadFXML();
@@ -39,10 +44,9 @@ public class DocumentCellController extends ListCell<Document> {
   @Override
   protected void updateItem(Document document, boolean empty) {
     super.updateItem(document, empty);
-
     if (empty) {
-      setText(null);
-      setContentDisplay(ContentDisplay.TEXT_ONLY);
+        setText(null);
+        setContentDisplay(ContentDisplay.TEXT_ONLY);
     } else {
       if (document instanceof Announcement) {
         type.setImage(new Image("/assets/icons/megaphone.png"));
@@ -50,11 +54,8 @@ public class DocumentCellController extends ListCell<Document> {
         type.setImage(new Image("/assets/icons/picket-fence.png"));
       }
       subject.setText(document.getSubject());
-//      publishDate.setText(document.getPublicationDate().toString());
-//      status.setText(document.getStatus().toString());
 
       setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
   }
-
 }

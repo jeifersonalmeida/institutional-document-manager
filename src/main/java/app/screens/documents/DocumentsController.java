@@ -3,7 +3,7 @@ package app.screens.documents;
 import app.models.Announcement;
 import app.models.Document;
 import app.models.ServantActivity;
-import app.screens.documents.documentsListView.DocumentCellFactory;
+import app.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,10 +32,55 @@ public class DocumentsController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    documentsListView.setCellFactory(new DocumentCellFactory());
+    documentsListView.setCellFactory(x -> new DocumentCellController());
     documentsListView.setItems(documents);
 
     Document announcement = new ServantActivity();
+    announcement.setSubject("Curso de inglês");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novo acesso ao IFSP");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novas regras para biblioteca");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Dia 8 não havera aula");
+    documents.add(announcement);
+
+    announcement.setSubject("Curso de inglês");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novo acesso ao IFSP");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novas regras para biblioteca");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Dia 8 não havera aula");
+    documents.add(announcement);
+
+    announcement.setSubject("Curso de inglês");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novo acesso ao IFSP");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Novas regras para biblioteca");
+    documents.add(announcement);
+
+    announcement = new Announcement();
+    announcement.setSubject("Dia 8 não havera aula");
+    documents.add(announcement);
+
     announcement.setSubject("Curso de inglês");
     documents.add(announcement);
 
@@ -54,7 +99,7 @@ public class DocumentsController implements Initializable {
 
   @FXML
   public void btnServants_click() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens.servants/ServantsScreen.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/servants/ServantsScreen.fxml"));
     Parent root = loader.load();
 
     Stage dialog = new Stage();
@@ -67,7 +112,7 @@ public class DocumentsController implements Initializable {
 
   public void bttNewDocument() throws IOException {
     VBox newDocumentModal = (VBox) FXMLLoader.load(
-        getClass().getResource("/screens/documents/newDocumentModal/NewDocumentModal.fxml"));
+        getClass().getResource("/modals/manageDocument/ManageDocument.fxml"));
     Stage stage = new Stage();
     stage.setTitle("New Document");
     stage.setScene(new Scene(newDocumentModal));
