@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="451.0" prefWidth="600.0" styleClass="root" stylesheets="@SingleReportStyle.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.screens.singleWorkloadReport.SingleReportController">
+    <children>
+        <TableView fx:id="tableViewOrdinances" layoutX="27.0" layoutY="109.0" prefHeight="256.0" prefWidth="550.0"
+                   AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="23.0"
+                   AnchorPane.topAnchor="109.0">
+            <columns>
+                <TableColumn fx:id="tableColumnOrdinance" prefWidth="480.0" text="Ordinance"/>
+                <TableColumn fx:id="tableColumnWorkload" minWidth="0.0" prefWidth="69.0" text="Workload"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="textFieldName" editable="false" layoutX="178.0" layoutY="71.0" prefHeight="25.0"
+                   prefWidth="251.0" AnchorPane.topAnchor="71.0"/>
+        <TextField fx:id="textFieldRecord" editable="false" layoutX="252.0" layoutY="23.0" prefHeight="25.0"
+                   prefWidth="102.0" AnchorPane.topAnchor="23.0"/>
+        <Label layoutX="288.0" layoutY="54.0" text="Name" AnchorPane.topAnchor="54.0"/>
+        <Label layoutX="258.0" layoutY="6.0" text="Academic record" AnchorPane.topAnchor="6.0"/>
+        <Button fx:id="buttonPrint" layoutX="282.0" layoutY="372.0" mnemonicParsing="false" text="Print"
+                AnchorPane.bottomAnchor="14.0"/>
+        <TextField fx:id="textFieldTotal" editable="false" layoutX="525.0" layoutY="388.0" prefHeight="25.0"
+                   prefWidth="41.0" text="53"/>
+        <Label layoutX="532.0" layoutY="371.0" text="Total"/>
+        <Label layoutX="571.0" layoutY="392.0" text="hs"/>
+    </children>
+</AnchorPane>
