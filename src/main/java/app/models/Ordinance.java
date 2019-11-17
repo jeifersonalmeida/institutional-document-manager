@@ -1,6 +1,9 @@
 package app.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 public class Ordinance extends Document {
 
@@ -8,6 +11,8 @@ public class Ordinance extends Document {
   private Date startingDate;
   private Date finishingDate;
   private OrdinanceType type;
+
+  private List<PublicServant> publicServants = new ArrayList<>();
 
   public Ordinance() {}
 
@@ -54,6 +59,14 @@ public class Ordinance extends Document {
 
   public void setType(OrdinanceType type) {
     this.type = type;
+  }
+
+  public Iterator<PublicServant> getPublicServants() {
+    return publicServants.iterator();
+  }
+
+  public void addPublicServant(PublicServant publicServant) {
+    this.publicServants.add(publicServant);
   }
 
 }
