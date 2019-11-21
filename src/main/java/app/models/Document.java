@@ -1,8 +1,6 @@
 package app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -12,6 +10,7 @@ public abstract class Document {
   private String number;
   private Date publicationDate;
   private String subject;
+  @Enumerated(EnumType.STRING)
   private Status status;
   private String filePath;
 
