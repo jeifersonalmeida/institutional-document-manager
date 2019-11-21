@@ -1,15 +1,17 @@
 package app.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+@MappedSuperclass
 public class Ordinance extends Document {
-
   private double workload;
   private Date startingDate;
   private Date finishingDate;
+  @Enumerated(EnumType.STRING)
   private OrdinanceType type;
 
   private List<PublicServant> publicServants = new ArrayList<>();
