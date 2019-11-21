@@ -1,12 +1,16 @@
 package app.models;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+@Entity
 public class ServantActivity extends Ordinance {
 
+  @ManyToOne
   private List<PublicServant> publicServants = new ArrayList<>();
 
   public ServantActivity() {}
