@@ -2,7 +2,6 @@ package app.screens.documents;
 
 import app.models.Announcement;
 import app.models.Document;
-import app.models.ServantActivity;
 import app.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +34,7 @@ public class DocumentsController implements Initializable {
     documentsListView.setCellFactory(x -> new DocumentCellController());
     documentsListView.setItems(documents);
 
-    Document announcement = new ServantActivity();
+    Document announcement = new Announcement();
     announcement.setSubject("Curso de inglês");
     documents.add(announcement);
 
