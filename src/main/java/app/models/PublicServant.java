@@ -1,7 +1,12 @@
 package app.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class PublicServant {
 
+    @Id
     private String id;
     private String name;
 
