@@ -7,6 +7,8 @@ import java.util.Date;
 public abstract class Document {
 
   @Id
+  @GeneratedValue
+  private long id;
   private String number;
   private Date publicationDate;
   private String subject;
