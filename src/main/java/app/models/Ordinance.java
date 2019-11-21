@@ -3,7 +3,7 @@ package app.models;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@MappedSuperclass
 public class Ordinance extends Document {
   private double workload;
   private Date startingDate;
