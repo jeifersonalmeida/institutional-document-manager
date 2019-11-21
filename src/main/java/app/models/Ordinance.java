@@ -5,9 +5,6 @@ import java.util.Date;
 
 @Entity
 public class Ordinance extends Document {
-  @Id
-  @GeneratedValue
-  private long id;
   private double workload;
   private Date startingDate;
   private Date finishingDate;

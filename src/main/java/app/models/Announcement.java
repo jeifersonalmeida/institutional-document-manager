@@ -6,9 +6,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Announcement extends Document {
-  @Id
-  @GeneratedValue
-  private long id;
 
   private String description;
 
