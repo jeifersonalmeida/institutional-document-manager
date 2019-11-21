@@ -1,14 +1,12 @@
 package app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Ordinance extends Document {
   @Id
+  @GeneratedValue
   private long id;
   private double workload;
   private Date startingDate;
