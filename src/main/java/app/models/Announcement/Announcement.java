@@ -1,10 +1,8 @@
 package app.models.Announcement;
 
-import app.models.Document;
+import app.models.Document.Document;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
 public class Announcement extends Document {

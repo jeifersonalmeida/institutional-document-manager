@@ -1,7 +1,7 @@
 package app.screens.documents;
 
 import app.models.Announcement.Announcement;
-import app.models.Document;
+import app.models.Document.Document;
 import app.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

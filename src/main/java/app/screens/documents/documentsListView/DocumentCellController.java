@@ -1,7 +1,7 @@
 package app.screens.documents.documentsListView;
 
 import app.models.Announcement.Announcement;
-import app.models.Document;
+import app.models.Document.Document;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
