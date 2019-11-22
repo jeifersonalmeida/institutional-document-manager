@@ -36,8 +36,11 @@ public class GenericDAO<T> {
   }
 
   public Boolean delete(T entity) {
+    EntityManager em = entityManager;
     try {
+      em.getTransaction().begin();
       entityManager.remove(entity);
+      em.getTransaction().commit();
     } catch (Exception ex) {
       return false;
     }
@@ -45,8 +48,12 @@ public class GenericDAO<T> {
   }
 
   public T edit(T entity) {
+    EntityManager em = entityManager;
     try{
-      return entityManager.merge(entity);
+      em.getTransaction().begin();
+      T res = entityManager.merge(entity);
+      em.getTransaction().commit();
+      return res;
     } catch(Exception ex) {
       return null;
     }
