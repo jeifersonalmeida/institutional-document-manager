@@ -13,6 +13,7 @@ public class Ordinance extends Document {
   private Date finishingDate;
   @Enumerated(EnumType.STRING)
   private OrdinanceType type;
+  private Ordinance ordinanceRepeal;
 
   private List<PublicServant> publicServants = new ArrayList<>();
 

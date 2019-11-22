@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="216.0" prefWidth="302.0" styleClass="root" stylesheets="@AddServantStyles.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.views.modals.newDocuments.addServant.AddServantController">
+    <children>
+        <VBox alignment="CENTER" layoutX="20.0" layoutY="12.0" prefHeight="235.0" prefWidth="262.0" spacing="5.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+              AnchorPane.topAnchor="12.0">
+            <children>
+                <Label text="Academic record">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="textFieldRecord" promptText="e.g. SC3001601"/>
+                <Label text="Name">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="textFieldName" promptText="e.g. Jeiferson Besta"/>
+                <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#buttonAdd_click" text="Add">
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                </Button>
+                <HBox alignment="CENTER" prefHeight="31.0" prefWidth="262.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#buttonSave_click" text="Save"
+                                visible="false"/>
+                        <Button fx:id="buttonRemove" mnemonicParsing="false" onAction="#buttonRemove_click"
+                                text="Remove" visible="false"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
