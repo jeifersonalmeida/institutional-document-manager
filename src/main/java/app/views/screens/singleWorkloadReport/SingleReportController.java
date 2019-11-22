@@ -1,8 +1,8 @@
 package app.views.screens.singleWorkloadReport;
 
-import app.models.Ordinance;
-import app.models.OrdinanceType;
-import app.models.PublicServant;
+import app.models.Ordinance.Ordinance;
+import app.models.Ordinance.OrdinanceType;
+import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -62,7 +62,7 @@ public class SingleReportController {
     }
 
     public void setServant(PublicServant servant) {
-        textFieldRecord.setText(servant.getId());
+        textFieldRecord.setText(servant.getRecord());
         textFieldName.setText(servant.getName());
     }
 }

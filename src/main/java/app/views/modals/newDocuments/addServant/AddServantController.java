@@ -1,7 +1,7 @@
-package app.views.modals.newDocuments.addServant;
+package app.modals;
 
-import app.models.PublicServant;
-import app.views.screens.servants.ServantsController;
+import app.models.PublicServant.PublicServant;
+import app.screens.servants.ServantsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -36,7 +36,7 @@ public class AddServantController {
   @FXML
   public void buttonSave_click() {
     if (!(textFieldRecord.getText().equals("") || textFieldName.getText().equals(""))) {
-      this.servant.setId(textFieldRecord.getText());
+      this.servant.setRecord(textFieldRecord.getText());
       this.servant.setName(textFieldName.getText());
     }
 
@@ -57,7 +57,7 @@ public class AddServantController {
     buttonSave.setVisible(true);
     buttonRemove.setVisible(true);
 
-    textFieldRecord.setText(servant.getId());
+    textFieldRecord.setText(servant.getRecord());
     textFieldName.setText(servant.getName());
 
     this.servant = servant;
