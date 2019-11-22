@@ -1,7 +1,7 @@
 package app.screens.servants;
 
 import app.modals.AddServantController;
-import app.models.PublicServant;
+import app.models.PublicServant.PublicServant;
 import app.screens.generalWorkloadReport.GeneralReportController;
 import app.screens.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;

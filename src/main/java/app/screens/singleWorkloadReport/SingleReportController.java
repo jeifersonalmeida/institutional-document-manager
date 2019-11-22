@@ -2,7 +2,7 @@ package app.screens.singleWorkloadReport;
 
 import app.models.Ordinance;
 import app.models.OrdinanceType;
-import app.models.PublicServant;
+import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

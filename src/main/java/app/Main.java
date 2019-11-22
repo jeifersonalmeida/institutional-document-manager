@@ -1,13 +1,12 @@
 package app;
 
-import app.DAO.PublicServantDAO;
-import app.models.PublicServant;
+import app.models.PublicServant.PublicServantDAO;
+import app.models.PublicServant.PublicServant;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 

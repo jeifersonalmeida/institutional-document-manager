@@ -1,6 +1,6 @@
 package app.modals;
 
-import app.models.PublicServant;
+import app.models.PublicServant.PublicServant;
 import app.screens.servants.ServantsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,5 +1,7 @@
 package app.models;
 
+import app.models.PublicServant.PublicServant;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
