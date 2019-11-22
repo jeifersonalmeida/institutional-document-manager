@@ -1,4 +1,4 @@
-package app.models;
+package app.models.Document;
 
 public enum Status {
     PUBLISHED,

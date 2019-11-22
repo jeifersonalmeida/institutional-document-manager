@@ -1,7 +1,7 @@
 package app.views.screens.singleWorkloadReport;
 
 import app.models.Ordinance.Ordinance;
-import app.models.OrdinanceType;
+import app.models.Ordinance.OrdinanceType;
 import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
