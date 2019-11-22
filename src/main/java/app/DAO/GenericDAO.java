@@ -2,18 +2,16 @@ package app.DAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public class GenericDAO<T> {
   private EntityManager entityManager;
   private Class<T> type;
 
   public GenericDAO() {
-    // TODO Auto-generated constructor stub
   }
 
   public GenericDAO(Class<T> type) {
-    // TODO Auto-generated constructor stub
-
     this.type = type;
   }
 
@@ -27,14 +25,12 @@ public class GenericDAO<T> {
   }
 
   public T save(T entity) {
-    // TODO Auto-generated method stub
     entityManager.persist(entity);
     entityManager.flush();
     return entity;
   }
 
   public Boolean delete(T entity) {
-    // TODO Auto-generated method stub
     try {
       entityManager.remove(entity);
     } catch (Exception ex) {
@@ -44,7 +40,6 @@ public class GenericDAO<T> {
   }
 
   public T edit(T entity) {
-    // TODO Auto-generated method stub
     try{
       return entityManager.merge(entity);
     } catch(Exception ex) {
@@ -53,7 +48,10 @@ public class GenericDAO<T> {
   }
 
   public T find(Long entityId) {
-    // TODO Auto-generated method stub
     return (T) entityManager.find(type, entityId);
+  }
+
+  public List<T> findAll(){
+    return (List<T>) entityManager.createQuery("Select t from " + type.getSimpleName() + " t").getResultList();
   }
 }
