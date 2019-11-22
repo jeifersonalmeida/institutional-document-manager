@@ -1,11 +1,14 @@
 package app.DAO;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public class GenericDAO<T> {
-  private EntityManager entityManager;
+  private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate");
+  private EntityManager entityManager = entityManagerFactory.createEntityManager();
   private Class<T> type;
 
   public GenericDAO() {
