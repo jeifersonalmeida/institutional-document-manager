@@ -62,7 +62,7 @@ public class SingleReportController {
     }
 
     public void setServant(PublicServant servant) {
-        textFieldRecord.setText(servant.getId());
+        textFieldRecord.setText(servant.getRecord());
         textFieldName.setText(servant.getName());
     }
 }

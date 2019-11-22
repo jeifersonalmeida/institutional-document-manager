@@ -153,7 +153,7 @@ public class ServantsController {
     }
 
     public void removePublicServant(String id){
-        this.publicServants.removeIf(p -> p.getId().equals(id));
+        this.publicServants.removeIf(p -> p.getRecord().equals(id));
         this.refreshList();
     }
 
@@ -163,7 +163,7 @@ public class ServantsController {
         System.out.println(filterString);
 
         if(!filterString.equals("")){
-            this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getId().contains(filterString) || p.getName().contains(filterString)));
+            this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getRecord().contains(filterString) || p.getName().contains(filterString)));
             this.refreshList();
             return;
         }
