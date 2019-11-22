@@ -1,6 +1,6 @@
 package app.views.screens.documents;
 
-import app.models.Announcement;
+import app.models.Announcement.Announcement;
 import app.models.Document;
 import app.views.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;

@@ -1,4 +1,6 @@
-package app.models;
+package app.models.Announcement;
+
+import app.models.Document;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
