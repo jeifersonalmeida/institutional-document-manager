@@ -1,7 +1,7 @@
 package app.models.Ordinance;
 
-import app.models.Document;
-import app.models.OrdinanceType;
+import app.models.Document.Document;
+import app.models.Ordinance.*;
 import app.models.PublicServant.PublicServant;
 
 import javax.persistence.*;
@@ -11,14 +11,17 @@ import java.util.Iterator;
 import java.util.List;
 
 @MappedSuperclass
+@Entity
 public class Ordinance extends Document {
   private double workload;
   private Date startingDate;
   private Date finishingDate;
   @Enumerated(EnumType.STRING)
   private OrdinanceType type;
+  @OneToOne
   private Ordinance ordinanceRepeal;
 
+  @ManyToMany
   private List<PublicServant> publicServants = new ArrayList<>();
 
   public Ordinance() {}
