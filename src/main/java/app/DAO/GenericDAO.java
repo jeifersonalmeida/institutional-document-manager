@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public class GenericDAO<T> {
-  private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate");
+  private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernatepu");
   private EntityManager entityManager = entityManagerFactory.createEntityManager();
   private Class<T> type;
 
@@ -28,8 +28,10 @@ public class GenericDAO<T> {
   }
 
   public T save(T entity) {
-    entityManager.persist(entity);
-    entityManager.flush();
+    EntityManager em = entityManager;
+    em.getTransaction().begin();
+    em.persist(entity);
+    em.getTransaction().commit();
     return entity;
   }
 

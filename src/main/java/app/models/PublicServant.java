@@ -1,17 +1,20 @@
 package app.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class PublicServant {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private long id;
+    private String record;
     private String name;
 
     public PublicServant(String id, String name) {
-        this.setId(id);
+        this.setRecord(id);
         this.setName(name);
     }
 
@@ -19,12 +22,12 @@ public class PublicServant {
 
     }
 
-    public String getId() {
-        return id;
+    public String getRecord() {
+        return record;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRecord(String id) {
+        this.record = id;
     }
 
     public String getName() {
