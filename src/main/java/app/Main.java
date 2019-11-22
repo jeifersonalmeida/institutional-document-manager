@@ -5,13 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/screens/documents/Documents.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/views/screens/documents/Documents.fxml"));
     primaryStage.setTitle("Institutional Document Manager");
     primaryStage.setScene(new Scene(root));
     primaryStage.setMaximized(true);

@@ -11,6 +11,7 @@ public class Ordinance extends Document {
   private Date startingDate;
   private Date finishingDate;
   private OrdinanceType type;
+  private Ordinance ordinanceRepeal;
 
   private List<PublicServant> publicServants = new ArrayList<>();
 

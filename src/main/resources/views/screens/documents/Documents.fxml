@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="container" stylesheets="@Documents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.views.screens.documents.DocumentsController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/logo_ifsp.png" />
+               </image>
+            </ImageView>
+            <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Instituto Federal de Educação, Ciência e Tecnologia de São Paulo" textFill="#eeeeee">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="30.0" prefWidth="200.0" VBox.vgrow="NEVER">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <children>
+            <TextField prefHeight="30.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Ubuntu" size="13.0" />
+               </font>
+            </TextField>
+            <Button fx:id="bttNewDocument" mnemonicParsing="false" onAction="#bttNewDocument" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Novo Documento" textFill="#444444" wrapText="true" HBox.hgrow="NEVER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button layoutX="812.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de CSV" textFill="#444444">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button layoutX="818.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Exportar para CSV">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnServants" layoutX="914.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnServants_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Servidores">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <ListView fx:id="documentsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ddd; -fx-padding: 0px;" VBox.vgrow="ALWAYS" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
