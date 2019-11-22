@@ -17,7 +17,7 @@ public class Ordinance extends Document {
 
   @Enumerated(EnumType.STRING)
   private OrdinanceType type;
-  
+
   @ManyToMany
   private List<PublicServant> publicServants = new ArrayList<>();
 
