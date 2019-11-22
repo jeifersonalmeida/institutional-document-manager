@@ -15,6 +15,10 @@ public class PublicServant {
         this.setName(name);
     }
 
+    public PublicServant() {
+
+    }
+
     public String getId() {
         return id;
     }
