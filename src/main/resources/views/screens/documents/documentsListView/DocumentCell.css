@@ -1,0 +1,7 @@
+.main-container {
+    -fx-background-color: #424242;
+}
+
+.main-container:hover {
+    -fx-background-color: #626262;
+}
