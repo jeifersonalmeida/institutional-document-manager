@@ -1,5 +1,7 @@
-package app.models;
+package app.models.Ordinance;
 
+import app.models.Document;
+import app.models.OrdinanceType;
 import app.models.PublicServant.PublicServant;
 
 import javax.persistence.*;

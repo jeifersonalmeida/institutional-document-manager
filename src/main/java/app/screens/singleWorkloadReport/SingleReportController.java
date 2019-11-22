@@ -1,6 +1,6 @@
 package app.screens.singleWorkloadReport;
 
-import app.models.Ordinance;
+import app.models.Ordinance.Ordinance;
 import app.models.OrdinanceType;
 import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;
