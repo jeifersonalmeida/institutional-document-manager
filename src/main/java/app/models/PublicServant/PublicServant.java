@@ -1,4 +1,4 @@
-package app.models;
+package app.models.PublicServant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
