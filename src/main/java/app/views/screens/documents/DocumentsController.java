@@ -1,8 +1,8 @@
-package app.views.screens.documents;
+package app.screens.documents;
 
 import app.models.Announcement.Announcement;
-import app.models.Document;
-import app.views.screens.documents.documentsListView.DocumentCellController;
+import app.models.Document.Document;
+import app.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -98,7 +98,7 @@ public class DocumentsController implements Initializable {
 
   @FXML
   public void btnServants_click() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/servants/ServantsScreen.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/servants/ServantsScreen.fxml"));
     Parent root = loader.load();
 
     Stage dialog = new Stage();
@@ -110,11 +110,11 @@ public class DocumentsController implements Initializable {
   }
 
   public void bttNewDocument() throws IOException {
-    VBox chooseDocumentTypeModal = (VBox) FXMLLoader.load(
-        getClass().getResource("/views/modals/chooseDocumentType/ChooseDocumentType.fxml"));
+    VBox newDocumentModal = (VBox) FXMLLoader.load(
+        getClass().getResource("/modals/manageDocument/ManageDocument.fxml"));
     Stage stage = new Stage();
-    stage.setTitle("Tipo do documento");
-    stage.setScene(new Scene(chooseDocumentTypeModal));
+    stage.setTitle("New Document");
+    stage.setScene(new Scene(newDocumentModal));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setResizable(false);
     stage.showAndWait();

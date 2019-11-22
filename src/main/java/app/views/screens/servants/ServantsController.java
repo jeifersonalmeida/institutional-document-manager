@@ -1,9 +1,9 @@
-package app.views.screens.servants;
+package app.screens.servants;
 
-import app.views.modals.newDocuments.addServant.AddServantController;
-import app.models.PublicServant;
-import app.views.screens.generalWorkloadReport.GeneralReportController;
-import app.views.screens.singleWorkloadReport.SingleReportController;
+import app.modals.AddServantController;
+import app.models.PublicServant.PublicServant;
+import app.screens.generalWorkloadReport.GeneralReportController;
+import app.screens.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,7 +36,7 @@ public class ServantsController {
     @FXML
     private Button buttonAddNew, buttonEdit, buttonSingleReport, buttonGeneralReport;
 
-    private String addServantPath = "/views/modals/addServant/AddServantModal.fxml";
+    private String addServantPath = "/modals/addServant/AddServantModal.fxml";
 
     @FXML
     private void initialize() {
@@ -107,7 +107,7 @@ public class ServantsController {
         PublicServant servant = tableViewServants.getSelectionModel().getSelectedItem();
 
         if (servant != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/singleWorkloadReport/SingleReport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/singleWorkloadReport/SingleReport.fxml"));
             Parent root = loader.load();
 
             SingleReportController controller = loader.getController();
@@ -124,7 +124,7 @@ public class ServantsController {
 
     @FXML
     public void buttonGeneralReport_click() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/generalWorkloadReport/GeneralReport.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
 
         GeneralReportController controller = loader.getController();
