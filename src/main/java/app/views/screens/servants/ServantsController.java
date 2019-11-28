@@ -1,6 +1,6 @@
 package app.views.screens.servants;
 
-import app.views.modals.newDocuments.addServant.AddServantController;
+import app.views.modals.addServant.AddServantController;
 import app.models.PublicServant;
 import app.views.screens.generalWorkloadReport.GeneralReportController;
 import app.views.screens.singleWorkloadReport.SingleReportController;

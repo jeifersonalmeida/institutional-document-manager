@@ -65,7 +65,7 @@ public class ChooseDocumentTypeController implements Initializable {
     newDocumentStage.setScene(new Scene(newDocument));
     newDocumentStage.initModality(Modality.APPLICATION_MODAL);
     newDocumentStage.setResizable(false);
-    newDocumentStage.showAndWait();
+    newDocumentStage.show();
   }
 
 }
