@@ -7,6 +7,11 @@
     <persistence-unit name="hibernatepu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>app.models.PublicServant.PublicServant</class>
+        <class>app.models.Announcement.Announcement</class>
+        <class>app.models.Document.Document</class>
+        <class>app.models.Ordinance.Ordinance</class>
+        <class>app.models.Ordinance.OrdinanceType</class>
+        <class>app.models.TeachingProject.TeachingProject</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:test" />
