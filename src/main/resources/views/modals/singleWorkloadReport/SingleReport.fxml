@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="451.0" prefWidth="600.0" styleClass="root" stylesheets="@SingleReportStyle.css"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.views.screens.singleWorkloadReport.SingleReportController">
+            fx:controller="app.views.modals.singleWorkloadReport.SingleReportController">
     <children>
         <TableView fx:id="tableViewOrdinances" layoutX="27.0" layoutY="109.0" prefHeight="256.0" prefWidth="550.0"
                    AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="23.0"

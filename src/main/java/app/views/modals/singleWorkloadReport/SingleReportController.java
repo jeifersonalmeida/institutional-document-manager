@@ -1,4 +1,4 @@
-package app.views.screens.singleWorkloadReport;
+package app.views.modals.singleWorkloadReport;
 
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceType;

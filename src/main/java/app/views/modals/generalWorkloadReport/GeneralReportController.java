@@ -1,4 +1,4 @@
-package app.views.screens.generalWorkloadReport;
+package app.views.modals.generalWorkloadReport;
 
 import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;

@@ -1,7 +1,7 @@
-package app.modals;
+package app.views.modals.newDocuments.addServant;
 
 import app.models.PublicServant.PublicServant;
-import app.screens.servants.ServantsController;
+import app.views.screens.servants.ServantsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
