@@ -26,4 +26,9 @@ mainClassName = "app.Main"
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation 'org.hibernate:hibernate-core:5.4.9.Final'
+    // https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+
 }

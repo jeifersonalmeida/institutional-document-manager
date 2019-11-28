@@ -1,6 +1,6 @@
 package app.views.screens.generalWorkloadReport;
 
-import app.models.PublicServant;
+import app.models.PublicServant.PublicServant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
