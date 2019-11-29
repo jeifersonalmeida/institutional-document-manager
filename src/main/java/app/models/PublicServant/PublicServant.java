@@ -1,25 +1,35 @@
 package app.models.PublicServant;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class PublicServant {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+
+    @Column
     private String record;
+
+    @Column
     private String name;
 
-    public PublicServant(String id, String name) {
-        this.setRecord(id);
+    public PublicServant(String record, String name) {
+        this.setRecord(record);
         this.setName(name);
     }
 
     public PublicServant() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getRecord() {

@@ -2,7 +2,6 @@ package app.views.screens.servants;
 
 import app.models.PublicServant.PublicServant;
 import app.models.PublicServant.PublicServantDAO;
-import app.views.modals.generalWorkloadReport.GeneralReportController;
 import app.views.modals.newDocuments.addServant.AddServantController;
 import app.views.modals.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
@@ -41,19 +40,6 @@ public class ServantsController {
     private void initialize() {
         fill();
     }
-
-//    private ObservableList<PublicServant> loadValues() {
-//        publicServants.add(new PublicServant("SC3528874", "Thomas Shelby"));
-//        publicServants.add(new PublicServant("SC6248833", "Grace Shelby"));
-//        publicServants.add(new PublicServant("SC3990183", "Arthur Shelby"));
-//        publicServants.add(new PublicServant("SC7710223", "John Shelby"));
-//        publicServants.add(new PublicServant("SC9044345", "Michael Gray"));
-//        publicServants.add(new PublicServant("SC2566811", "Polly Gray"));
-//        publicServants.add(new PublicServant("SC9134104", "Lizzie Stark"));
-//        publicServants.add(new PublicServant("SC3404597", "Ada Thorne"));
-//
-//        return publicServants;
-//    }
 
     @FXML
     private void fill() {
@@ -126,9 +112,6 @@ public class ServantsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
 
-        GeneralReportController controller = loader.getController();
-        controller.setServants(publicServants);
-
         Stage dialog = new Stage();
         dialog.setTitle("Workload report");
         dialog.setScene(new Scene(root));
@@ -137,28 +120,13 @@ public class ServantsController {
         dialog.showAndWait();
     }
 
-    public void refreshList(){
+    public void fillList(){
         PublicServantDAO dao = new PublicServantDAO();
         publicServants = FXCollections.observableArrayList(dao.findAll());
-        System.out.println("-->" + dao.findAll());
+
+        tableViewServants.setItems(publicServants);
+
         this.tableViewServants.refresh();
-    }
-
-    public void addPublicServant(PublicServant publicServant){
-//        this.publicServants.add(publicServant);
-        PublicServantDAO dao = new PublicServantDAO();
-        dao.save(publicServant);
-        this.refreshList();
-    }
-
-    public void removePublicServant(PublicServant publicServant){
-        this.publicServants.remove(publicServant);
-        this.refreshList();
-    }
-
-    public void removePublicServant(String id){
-        this.publicServants.removeIf(p -> p.getRecord().equals(id));
-        this.refreshList();
     }
 
     @FXML
@@ -168,9 +136,12 @@ public class ServantsController {
 
         if(!filterString.equals("")){
             this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getRecord().contains(filterString) || p.getName().contains(filterString)));
-            this.refreshList();
+            this.tableViewServants.refresh();
+
             return;
         }
         this.tableViewServants.setItems(this.publicServants);
+        this.tableViewServants.refresh();
+
     }
 }

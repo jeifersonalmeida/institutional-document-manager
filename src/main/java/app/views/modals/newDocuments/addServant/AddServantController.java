@@ -1,6 +1,7 @@
 package app.views.modals.newDocuments.addServant;
 
 import app.models.PublicServant.PublicServant;
+import app.models.PublicServant.PublicServantDAO;
 import app.views.screens.servants.ServantsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,8 +28,10 @@ public class AddServantController {
   @FXML
   public void buttonAdd_click() {
     if(!(this.textFieldName.getText().equals("") || this.textFieldRecord.getText().equals(""))){
-      this.parentController.addPublicServant(new PublicServant(this.textFieldRecord.getText(), this.textFieldName.getText()));
+      new PublicServantDAO().save(new PublicServant(this.textFieldRecord.getText(), this.textFieldName.getText()));
     }
+
+    this.parentController.fillList();
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
     stage.close();
   }
@@ -38,16 +41,18 @@ public class AddServantController {
     if (!(textFieldRecord.getText().equals("") || textFieldName.getText().equals(""))) {
       this.servant.setRecord(textFieldRecord.getText());
       this.servant.setName(textFieldName.getText());
+      new PublicServantDAO().edit(this.servant);
     }
 
-    this.parentController.refreshList();
+    this.parentController.fillList();
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
     stage.close();
   }
 
   @FXML
   public void buttonRemove_click() {
-    this.parentController.removePublicServant(this.textFieldRecord.getText());
+    new PublicServantDAO().delete(this.servant);
+    this.parentController.fillList();
     Stage stage = (Stage) buttonAdd.getScene().getWindow();
     stage.close();
   }
@@ -59,6 +64,8 @@ public class AddServantController {
 
     textFieldRecord.setText(servant.getRecord());
     textFieldName.setText(servant.getName());
+
+    System.out.println("\n\nId: " + servant.getId() + "\n\n");
 
     this.servant = servant;
   }

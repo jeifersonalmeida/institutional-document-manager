@@ -1,6 +1,7 @@
 package app.views.modals.generalWorkloadReport;
 
 import app.models.PublicServant.PublicServant;
+import app.models.PublicServant.PublicServantDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,16 +23,10 @@ public class GeneralReportController {
     @FXML
     private Button buttonPrint;
 
-    private ObservableList<PublicServant> servants = FXCollections.observableArrayList();
-
     @FXML
     private void initialize() {
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableColumnWorkload.setCellValueFactory(new PropertyValueFactory<>("totalWorkload"));
-    }
-
-    public void setServants(ObservableList<PublicServant> servants) {
-        this.servants = servants;
-        this.tableViewServants.setItems(servants);
+        this.tableViewServants.setItems(FXCollections.observableArrayList(new PublicServantDAO().findAll()));
     }
 }
