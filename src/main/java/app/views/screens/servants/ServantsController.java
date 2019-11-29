@@ -2,7 +2,7 @@ package app.views.screens.servants;
 
 import app.models.PublicServant.PublicServant;
 import app.models.PublicServant.PublicServantDAO;
-import app.views.modals.newDocuments.addServant.AddServantController;
+import app.views.modals.addServant.AddServantController;
 import app.views.modals.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
