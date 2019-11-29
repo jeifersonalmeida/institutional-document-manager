@@ -1,9 +1,9 @@
-package app.screens.servants;
+package app.views.screens.servants;
 
-import app.modals.AddServantController;
 import app.models.PublicServant.PublicServant;
-import app.screens.generalWorkloadReport.GeneralReportController;
-import app.screens.singleWorkloadReport.SingleReportController;
+import app.models.PublicServant.PublicServantDAO;
+import app.views.modals.newDocuments.addServant.AddServantController;
+import app.views.modals.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class ServantsController {
     @FXML
-    private ObservableList<PublicServant> publicServants = FXCollections.observableArrayList();
+    private ObservableList<PublicServant> publicServants = FXCollections.observableArrayList(new PublicServantDAO().findAll());
 
     @FXML
     private TextField textFieldSearchbar;
@@ -36,32 +36,17 @@ public class ServantsController {
     @FXML
     private Button buttonAddNew, buttonEdit, buttonSingleReport, buttonGeneralReport;
 
-    private String addServantPath = "/modals/addServant/AddServantModal.fxml";
-
     @FXML
     private void initialize() {
         fill();
     }
 
-    private ObservableList<PublicServant> loadValues() {
-        publicServants.add(new PublicServant("SC3528874", "Thomas Shelby"));
-        publicServants.add(new PublicServant("SC6248833", "Grace Shelby"));
-        publicServants.add(new PublicServant("SC3990183", "Arthur Shelby"));
-        publicServants.add(new PublicServant("SC7710223", "John Shelby"));
-        publicServants.add(new PublicServant("SC9044345", "Michael Gray"));
-        publicServants.add(new PublicServant("SC2566811", "Polly Gray"));
-        publicServants.add(new PublicServant("SC9134104", "Lizzie Stark"));
-        publicServants.add(new PublicServant("SC3404597", "Ada Thorne"));
-
-        return publicServants;
-    }
-
     @FXML
     private void fill() {
-        tableColumnRecord.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableColumnRecord.setCellValueFactory(new PropertyValueFactory<>("record"));
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        tableViewServants.setItems(loadValues());
+        tableViewServants.setItems(publicServants);
         tableViewServants.setPlaceholder(new Label("No Servants registered"));
 
     }
@@ -69,7 +54,7 @@ public class ServantsController {
     @FXML
     public void buttonAddNew_click() throws IOException {
         Stage dialog = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(addServantPath));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/addServant/AddServantModal.fxml"));
         Parent root = loader.load();
 
         AddServantController controller = loader.getController();
@@ -86,7 +71,7 @@ public class ServantsController {
         PublicServant servant = tableViewServants.getSelectionModel().getSelectedItem();
 
         if (servant != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(addServantPath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/addServant/AddServantModal.fxml"));
             Parent root = loader.load();
 
             AddServantController controller = loader.getController();
@@ -107,7 +92,7 @@ public class ServantsController {
         PublicServant servant = tableViewServants.getSelectionModel().getSelectedItem();
 
         if (servant != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/singleWorkloadReport/SingleReport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/singleWorkloadReport/SingleReport.fxml"));
             Parent root = loader.load();
 
             SingleReportController controller = loader.getController();
@@ -124,11 +109,8 @@ public class ServantsController {
 
     @FXML
     public void buttonGeneralReport_click() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/generalWorkloadReport/GeneralReport.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
-
-        GeneralReportController controller = loader.getController();
-        controller.setServants(publicServants);
 
         Stage dialog = new Stage();
         dialog.setTitle("Workload report");
@@ -138,23 +120,13 @@ public class ServantsController {
         dialog.showAndWait();
     }
 
-    public void refreshList(){
+    public void fillList(){
+        PublicServantDAO dao = new PublicServantDAO();
+        publicServants = FXCollections.observableArrayList(dao.findAll());
+
+        tableViewServants.setItems(publicServants);
+
         this.tableViewServants.refresh();
-    }
-
-    public void addPublicServant(PublicServant publicServant){
-        this.publicServants.add(publicServant);
-        this.refreshList();
-    }
-
-    public void removePublicServant(PublicServant publicServant){
-        this.publicServants.remove(publicServant);
-        this.refreshList();
-    }
-
-    public void removePublicServant(String id){
-        this.publicServants.removeIf(p -> p.getRecord().equals(id));
-        this.refreshList();
     }
 
     @FXML
@@ -164,9 +136,12 @@ public class ServantsController {
 
         if(!filterString.equals("")){
             this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getRecord().contains(filterString) || p.getName().contains(filterString)));
-            this.refreshList();
+            this.tableViewServants.refresh();
+
             return;
         }
         this.tableViewServants.setItems(this.publicServants);
+        this.tableViewServants.refresh();
+
     }
 }

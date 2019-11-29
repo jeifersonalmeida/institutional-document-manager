@@ -1,8 +1,8 @@
-package app.screens.documents;
+package app.views.screens.documents;
 
 import app.models.Announcement.Announcement;
 import app.models.Document.Document;
-import app.screens.documents.documentsListView.DocumentCellController;
+import app.views.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -98,7 +98,7 @@ public class DocumentsController implements Initializable {
 
   @FXML
   public void btnServants_click() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/servants/ServantsScreen.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/servants/ServantsScreen.fxml"));
     Parent root = loader.load();
 
     Stage dialog = new Stage();

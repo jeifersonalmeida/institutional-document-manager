@@ -13,15 +13,52 @@
         <class>app.models.Ordinance.OrdinanceType</class>
         <class>app.models.TeachingProject.TeachingProject</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:test" />
-            <property name="javax.persistence.jdbc.user" value="sa" />
-            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect" />
+            <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC" />
+            <property name="hibernate.connection.username" value="" />
+            <property name="hibernate.connection.password" value="" />
+            <property name="hibernate.connection.user" value="" />
+            <property name="hibernate.connection.autocommit" value="true"/>
+            <property name="hibernate.connection.url" value="jdbc:sqlite:sqlite.db"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.flushMode" value="ALWAYS" />
+            <property name="hibernate.cache.use_second_level_cache" value="false" />
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="show_sql" value="true"/>
-            <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+            <!-- create https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html -->
+            <property name="hbm2ddl.auto" value="update or create or validate or create-drop" />
+
+
+
+<!--            <property name="hibernate.archive.autodetection" value="class" />-->
+<!--            &lt;!&ndash; Propriedades JDBC &ndash;&gt;-->
+<!--            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:./project.db" />-->
+<!--            <property name="javax.persistence.jdbc.user" value="" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="" />-->
+<!--            <property name="hibernate.connection.autocommit" value="true"/>-->
+
+<!--            &lt;!&ndash; Configurações específicas do Hibernate &ndash;&gt;-->
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect" />-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
+<!--            <property name="hibernate.show_sql" value="true" />-->
+
+
+
+
+
+<!--            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />-->
+<!--            <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:test" />-->
+<!--            <property name="javax.persistence.jdbc.user" value="sa" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="" />-->
+
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
+<!--            <property name="show_sql" value="true"/>-->
+<!--            <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>-->
+
+
 <!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
 <!--            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>-->
 <!--            <property name="javax.persistence.jdbc.user" value="sa"/>-->
