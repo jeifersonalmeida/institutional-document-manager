@@ -1,9 +1,9 @@
-package app.screens.servants;
+package app.views.screens.servants;
 
-import app.modals.AddServantController;
 import app.models.PublicServant.PublicServant;
-import app.screens.generalWorkloadReport.GeneralReportController;
-import app.screens.singleWorkloadReport.SingleReportController;
+import app.views.modals.addServant.AddServantController;
+import app.views.screens.generalWorkloadReport.GeneralReportController;
+import app.views.screens.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

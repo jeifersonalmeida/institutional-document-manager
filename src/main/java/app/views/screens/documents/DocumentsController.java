@@ -1,8 +1,9 @@
-package app.screens.documents;
+package app.views.screens.documents;
 
 import app.models.Announcement.Announcement;
+import app.models.Announcement.AnnouncementDAO;
 import app.models.Document.Document;
-import app.screens.documents.documentsListView.DocumentCellController;
+import app.views.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DocumentsController implements Initializable {
@@ -28,72 +30,14 @@ public class DocumentsController implements Initializable {
   private ListView<Document> documentsListView;
 
   private ObservableList<Document> documents = FXCollections.observableArrayList();
+  private AnnouncementDAO announcementDAO = new AnnouncementDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     documentsListView.setCellFactory(x -> new DocumentCellController());
-    documentsListView.setItems(documents);
-
-    Document announcement = new Announcement();
-    announcement.setSubject("Curso de inglês");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novo acesso ao IFSP");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novas regras para biblioteca");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Dia 8 não havera aula");
-    documents.add(announcement);
-
-    announcement.setSubject("Curso de inglês");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novo acesso ao IFSP");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novas regras para biblioteca");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Dia 8 não havera aula");
-    documents.add(announcement);
-
-    announcement.setSubject("Curso de inglês");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novo acesso ao IFSP");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novas regras para biblioteca");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Dia 8 não havera aula");
-    documents.add(announcement);
-
-    announcement.setSubject("Curso de inglês");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novo acesso ao IFSP");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Novas regras para biblioteca");
-    documents.add(announcement);
-
-    announcement = new Announcement();
-    announcement.setSubject("Dia 8 não havera aula");
-    documents.add(announcement);
+    List<Announcement> announcementList = announcementDAO.findAll();
+    System.out.println(announcementList.size());
+    documentsListView.setItems(FXCollections.observableArrayList(announcementList));
   }
 
   @FXML
@@ -111,7 +55,7 @@ public class DocumentsController implements Initializable {
 
   public void bttNewDocument() throws IOException {
     VBox newDocumentModal = (VBox) FXMLLoader.load(
-        getClass().getResource("/modals/manageDocument/ManageDocument.fxml"));
+        getClass().getResource("/views/modals/chooseDocumentType/ChooseDocumentType.fxml"));
     Stage stage = new Stage();
     stage.setTitle("New Document");
     stage.setScene(new Scene(newDocumentModal));
