@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@GeneralReportStyle.css"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.views.screens.generalWorkloadReport.GeneralReportController">
+            fx:controller="app.views.modals.generalWorkloadReport.GeneralReportController">
     <children>
         <TableView fx:id="tableViewServants" layoutX="14.0" layoutY="11.0" prefHeight="335.0" prefWidth="571.0">
             <columns>

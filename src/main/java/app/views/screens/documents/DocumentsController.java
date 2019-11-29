@@ -42,7 +42,7 @@ public class DocumentsController implements Initializable {
 
   @FXML
   public void btnServants_click() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/modals/servants/ServantsScreen.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/servants/ServantsScreen.fxml"));
     Parent root = loader.load();
 
     Stage dialog = new Stage();
