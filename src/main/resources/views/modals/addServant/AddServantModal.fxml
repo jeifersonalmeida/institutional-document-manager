@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="216.0" prefWidth="302.0" styleClass="root" stylesheets="@AddServantStyles.css"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.views.modals.newDocuments.addServant.AddServantController">
+            fx:controller="app.views.modals.addServant.AddServantController">
     <children>
         <VBox alignment="CENTER" layoutX="20.0" layoutY="12.0" prefHeight="235.0" prefWidth="262.0" spacing="5.0"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
