@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-@MappedSuperclass
+@Entity
 public class Ordinance extends Document {
   private double workload;
   private Date startingDate;
