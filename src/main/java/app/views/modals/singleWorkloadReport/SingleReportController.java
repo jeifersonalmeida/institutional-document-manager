@@ -69,7 +69,19 @@ public class SingleReportController {
 
         ordinances = ordinances.filtered(o -> o.hasPublicServant(servant));
 
+        textFieldTotal.setText(String.valueOf(getTotalWorkload()));
+
         textFieldRecord.setText(this.servant.getRecord());
         textFieldName.setText(this.servant.getName());
+    }
+
+    private double getTotalWorkload(){
+        double total = 0.0;
+
+        for (Ordinance ordinance : ordinances) {
+            total += ordinance.getWorkload();
+        }
+
+        return total;
     }
 }
