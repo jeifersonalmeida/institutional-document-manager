@@ -1,6 +1,10 @@
 package app.models.PublicServant;
 
+import app.models.Ordinance.Ordinance;
+import app.models.Ordinance.OrdinanceDAO;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class PublicServant {
@@ -49,7 +53,15 @@ public class PublicServant {
     }
 
     public double getTotalWorkload() {
-        return 0.0;
+        List<Ordinance> ordinances = new OrdinanceDAO().findAll();
+
+        double total = 0.0;
+
+        for (Ordinance ordinance : ordinances) {
+            total += ordinance.getWorkload();
+        }
+
+        return total;
     }
 
 }
