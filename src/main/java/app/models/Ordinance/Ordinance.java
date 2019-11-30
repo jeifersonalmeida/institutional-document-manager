@@ -5,15 +5,14 @@ import app.models.PublicServant.PublicServant;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 @Entity
 public class Ordinance extends Document {
   private double workload;
-  private Date startingDate;
-  private Date finishingDate;
+  private String startingDate;
+  private String finishingDate;
 
   @Enumerated(EnumType.STRING)
   private OrdinanceType type;
@@ -24,8 +23,8 @@ public class Ordinance extends Document {
   public Ordinance() {}
 
   public Ordinance(
-      Date startingDate,
-      Date finishingDate,
+      String startingDate,
+      String finishingDate,
       double workload,
       OrdinanceType type,
       String subject) {
@@ -44,19 +43,19 @@ public class Ordinance extends Document {
     this.workload = workload;
   }
 
-  public Date getStartingDate() {
+  public String getStartingDate() {
     return startingDate;
   }
 
-  public void setStartingDate(Date startingDate) {
+  public void setStartingDate(String startingDate) {
     this.startingDate = startingDate;
   }
 
-  public Date getFinishingDate() {
+  public String getFinishingDate() {
     return finishingDate;
   }
 
-  public void setFinishingDate(Date finishingDate) {
+  public void setFinishingDate(String finishingDate) {
     this.finishingDate = finishingDate;
   }
 
