@@ -1,7 +1,6 @@
 package app.models.Document;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @MappedSuperclass
 public abstract class Document {
@@ -10,7 +9,7 @@ public abstract class Document {
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private long id;
   private String number;
-  private Date publicationDate;
+  private String publicationDate;
   private String subject;
   @Enumerated(EnumType.STRING)
   private Status status;
@@ -24,11 +23,11 @@ public abstract class Document {
       this.number = number;
   }
 
-  public Date getPublicationDate() {
+  public String getPublicationDate() {
       return publicationDate;
   }
 
-  public void setPublicationDate(Date publicationDate) {
+  public void setPublicationDate(String publicationDate) {
       this.publicationDate = publicationDate;
   }
 
