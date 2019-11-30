@@ -38,7 +38,7 @@ public class AnnouncementController {
   private Announcement getAnnoucement() {
     Announcement announcement = new Announcement();
     announcement.setNumber(tfNumber.getText());
-    announcement.setPublicationDate(new Date());
+    announcement.setPublicationDate(new Date().toString());
     announcement.setSubject(tfSubject.getText());
     announcement.setStatus(Status.NOT_PUBLISHED);
     announcement.setFilePath("");
