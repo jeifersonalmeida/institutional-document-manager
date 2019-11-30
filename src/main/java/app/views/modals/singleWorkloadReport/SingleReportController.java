@@ -60,7 +60,7 @@ public class SingleReportController {
         tableColumnWorkload.setCellValueFactory(new PropertyValueFactory<>("workload"));
 
         tableViewOrdinances.setItems(ordinances);
-        tableViewOrdinances.setPlaceholder(new Label("No Ordinances registered"));
+        tableViewOrdinances.setPlaceholder(new Label("Nenhuma Portaria registrada"));
 
     }
 

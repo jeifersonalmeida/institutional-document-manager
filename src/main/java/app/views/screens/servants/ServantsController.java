@@ -47,7 +47,7 @@ public class ServantsController {
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         tableViewServants.setItems(publicServants);
-        tableViewServants.setPlaceholder(new Label("No Servants registered"));
+        tableViewServants.setPlaceholder(new Label("Nenhum servidor registrado"));
 
     }
 
@@ -59,7 +59,7 @@ public class ServantsController {
 
         AddServantController controller = loader.getController();
         controller.setParentController(this);
-        dialog.setTitle("Add servant");
+        dialog.setTitle("Adição de servidor");
         dialog.setScene(new Scene(root));
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
@@ -79,7 +79,7 @@ public class ServantsController {
             controller.setParentController(this);
 
             Stage dialog = new Stage();
-            dialog.setTitle("Edit servant");
+            dialog.setTitle(servant.getName());
             dialog.setScene(new Scene(root));
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -99,7 +99,7 @@ public class ServantsController {
             controller.setServant(servant);
 
             Stage dialog = new Stage();
-            dialog.setTitle("Workload report");
+            dialog.setTitle(servant.getName());
             dialog.setScene(new Scene(root));
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -113,7 +113,7 @@ public class ServantsController {
         Parent root = loader.load();
 
         Stage dialog = new Stage();
-        dialog.setTitle("Workload report");
+        dialog.setTitle("Relatório de carga horária");
         dialog.setScene(new Scene(root));
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
