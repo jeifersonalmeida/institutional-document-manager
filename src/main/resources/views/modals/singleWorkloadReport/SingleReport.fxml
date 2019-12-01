@@ -16,7 +16,7 @@
         <TextField fx:id="textFieldRecord" editable="false" layoutX="252.0" layoutY="23.0" prefHeight="25.0" prefWidth="102.0" AnchorPane.topAnchor="23.0" />
         <Label layoutX="288.0" layoutY="54.0" text="Nome" AnchorPane.topAnchor="54.0" />
         <Label layoutX="275.0" layoutY="6.0" text="Prontuário" AnchorPane.topAnchor="6.0" />
-        <Button fx:id="buttonPrint" layoutX="282.0" layoutY="372.0" mnemonicParsing="false" text="Imprimir" AnchorPane.bottomAnchor="14.0" />
+        <Button fx:id="buttonPrint" layoutX="270.0" layoutY="413.0" mnemonicParsing="false" onAction="#buttonPrint_click" text="Gerar PDF" AnchorPane.bottomAnchor="13.0" />
         <TextField fx:id="textFieldTotal" editable="false" layoutX="525.0" layoutY="388.0" prefHeight="25.0" prefWidth="41.0" />
         <Label layoutX="532.0" layoutY="371.0" text="Total" />
         <Label layoutX="571.0" layoutY="392.0" text="hs" />
