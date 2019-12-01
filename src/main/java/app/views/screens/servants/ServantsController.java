@@ -3,6 +3,7 @@ package app.views.screens.servants;
 import app.models.PublicServant.PublicServant;
 import app.models.PublicServant.PublicServantDAO;
 import app.views.modals.addServant.AddServantController;
+import app.views.modals.generalWorkloadReport.GeneralReportController;
 import app.views.modals.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -112,9 +113,11 @@ public class ServantsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
 
+        GeneralReportController controller = loader.getController();
         Stage dialog = new Stage();
         dialog.setTitle("Relatório de carga horária");
-        dialog.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        dialog.setScene(scene);
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
         dialog.showAndWait();
