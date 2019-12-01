@@ -16,6 +16,6 @@
                 <TableColumn fx:id="tableColumnWorkload" prefWidth="90.0" text="Carga horária" />
             </columns>
         </TableView>
-        <Button fx:id="buttonPrint" layoutX="280.0" layoutY="361.0" mnemonicParsing="false" text="Imprimir" />
+        <Button fx:id="buttonPrint" layoutX="265.0" layoutY="361.0" mnemonicParsing="false" onAction="#buttonPrint_click" text="Gerar PDF" />
     </children>
 </AnchorPane>
