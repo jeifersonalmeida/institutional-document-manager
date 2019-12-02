@@ -1,14 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.views.modals.newDocuments.ordinance.OrdinanceController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="300.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.views.modals.newDocuments.ordinance.OrdinanceController">
+    <children>
+        <Label text="Número:" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfNumber" promptText="Numero da portaria">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font>
+        </TextField>
+        <Label layoutX="20.0" layoutY="20.0" text="Assunto" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="12.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </Label>
+        <TextField fx:id="tfSubject" layoutX="20.0" layoutY="40.0" promptText="Assunto da portaria">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </TextField>
+      <Label layoutX="20.0" layoutY="73.0" text="Carga Horária" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="tfWorkLoad" layoutX="20.0" layoutY="93.0" promptText="Carga horária da portaria">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </TextField>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="42.0" prefWidth="138.0">
+               <children>
+                  <Label text="Início da vigência" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpInitialValidity" promptText="Início da vigência">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="137.0">
+               <children>
+                  <Label text="Fim da vigência" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpFinalValidity" promptText="Fim da vigência">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <CheckBox fx:id="cbOrdinanceRevoke" mnemonicParsing="false" onAction="#revokeOrdinance" text="Revogar portaria" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </CheckBox>
+      <ChoiceBox fx:id="cbSelectOrdinanceRevoke" disable="true" prefHeight="25.0" prefWidth="345.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </ChoiceBox>
+      <Label layoutX="20.0" layoutY="128.0" text="Servidores" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <ListView fx:id="lvPublicServants" minHeight="50.0" prefHeight="200.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </ListView>
+        <Button fx:id="btChooseFile" mnemonicParsing="false" onAction="#btChooseFile" prefHeight="26.0" prefWidth="305.0" text="Selecionar Servidores">
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+            <font>
+                <Font name="Arial Bold" size="13.0" />
+            </font>
+        </Button>
+      <Button fx:id="btChooseFile1" layoutX="20.0" layoutY="330.0" mnemonicParsing="false" onAction="#btChooseFile" prefHeight="26.0" prefWidth="305.0" text="Selecionar Arquivo">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Button>
+        <HBox alignment="TOP_CENTER" prefHeight="7.0" prefWidth="280.0">
+            <children>
+                <Button fx:id="btSave" mnemonicParsing="false" onAction="#btSaveHandler" prefHeight="26.0" prefWidth="152.0" text="Salvar" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Bold" size="13.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btPublish" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btPublishHandler" prefHeight="26.0" prefWidth="120.0" text="Publicar" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Bold" size="13.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</VBox>

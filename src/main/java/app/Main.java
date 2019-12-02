@@ -1,13 +1,5 @@
 package app;
 
-import app.models.Announcement.Announcement;
-import app.models.Announcement.AnnouncementDAO;
-import app.models.Ordinance.Ordinance;
-import app.models.Ordinance.OrdinanceDAO;
-import app.models.PublicServant.PublicServantDAO;
-import app.models.PublicServant.PublicServant;
-import app.models.TeachingProject.TeachingProject;
-import app.models.TeachingProject.TeachingProjectDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
