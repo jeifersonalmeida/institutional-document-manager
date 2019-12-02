@@ -55,6 +55,11 @@ public class DocumentCellController extends ListCell<Document> {
       }
       subject.setText(document.getSubject());
 
+      publishDate.setText("Publicado em: " + document.getPublicationDate());
+      if (document.getFilePath() != "") {
+        status.setText("Pendente de documento!");
+      }
+
       setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
   }

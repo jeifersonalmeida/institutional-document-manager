@@ -1,8 +1,9 @@
 package app.views.screens.documents;
 
-import app.models.Announcement.Announcement;
 import app.models.Announcement.AnnouncementDAO;
 import app.models.Document.Document;
+import app.models.Ordinance.OrdinanceDAO;
+import app.models.TeachingProject.TeachingProjectDAO;
 import app.views.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +14,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class DocumentsController implements Initializable {
@@ -30,14 +30,25 @@ public class DocumentsController implements Initializable {
   private ListView<Document> documentsListView;
 
   private ObservableList<Document> documents = FXCollections.observableArrayList();
+
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
+  private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
+  private TeachingProjectDAO teachingProjectDAO = new TeachingProjectDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     documentsListView.setCellFactory(x -> new DocumentCellController());
-    List<Announcement> announcementList = announcementDAO.findAll();
-    System.out.println(announcementList.size());
-    documentsListView.setItems(FXCollections.observableArrayList(announcementList));
+
+    documentsListView.setItems(this.documents);
+    refresh();
+  }
+
+  public void refresh() {
+    documents.clear();
+    documents.addAll(announcementDAO.findAll());
+    documents.addAll(ordinanceDAO.findAll());
+    documents.addAll(teachingProjectDAO.findAll());
+    documentsListView.refresh();
   }
 
   @FXML
