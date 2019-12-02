@@ -33,6 +33,11 @@ dependencies {
     compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
     // https://mvnrepository.com/artifact/com.zsoltfabok/sqlite-dialect
     compile group: 'com.zsoltfabok', name: 'sqlite-dialect', version: '1.0'
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
+    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.17'
+
 
 
 }

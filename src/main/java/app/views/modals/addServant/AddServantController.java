@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class AddServantController {
   @FXML
-  private Button buttonAdd, buttonSave, buttonRemove;
+  private Button buttonAdd, buttonSave;
 
   @FXML
   private TextField textFieldRecord, textFieldName;
@@ -22,7 +22,6 @@ public class AddServantController {
   public void initialize() {
     buttonAdd.managedProperty().bind(buttonAdd.visibleProperty());
     buttonSave.managedProperty().bind(buttonSave.visibleProperty());
-    buttonRemove.managedProperty().bind(buttonRemove.visibleProperty());
   }
 
   @FXML
@@ -60,7 +59,6 @@ public class AddServantController {
   public void setServant(PublicServant servant) {
     buttonAdd.setVisible(false);
     buttonSave.setVisible(true);
-    buttonRemove.setVisible(true);
 
     textFieldRecord.setText(servant.getRecord());
     textFieldName.setText(servant.getName());

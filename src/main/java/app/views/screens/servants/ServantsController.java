@@ -3,6 +3,7 @@ package app.views.screens.servants;
 import app.models.PublicServant.PublicServant;
 import app.models.PublicServant.PublicServantDAO;
 import app.views.modals.addServant.AddServantController;
+import app.views.modals.generalWorkloadReport.GeneralReportController;
 import app.views.modals.singleWorkloadReport.SingleReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,7 +48,7 @@ public class ServantsController {
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         tableViewServants.setItems(publicServants);
-        tableViewServants.setPlaceholder(new Label("No Servants registered"));
+        tableViewServants.setPlaceholder(new Label("Nenhum servidor registrado"));
 
     }
 
@@ -59,7 +60,7 @@ public class ServantsController {
 
         AddServantController controller = loader.getController();
         controller.setParentController(this);
-        dialog.setTitle("Add servant");
+        dialog.setTitle("Adição de servidor");
         dialog.setScene(new Scene(root));
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
@@ -79,7 +80,7 @@ public class ServantsController {
             controller.setParentController(this);
 
             Stage dialog = new Stage();
-            dialog.setTitle("Edit servant");
+            dialog.setTitle(servant.getName());
             dialog.setScene(new Scene(root));
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -99,7 +100,7 @@ public class ServantsController {
             controller.setServant(servant);
 
             Stage dialog = new Stage();
-            dialog.setTitle("Workload report");
+            dialog.setTitle(servant.getName());
             dialog.setScene(new Scene(root));
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -112,9 +113,11 @@ public class ServantsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/generalWorkloadReport/GeneralReport.fxml"));
         Parent root = loader.load();
 
+        GeneralReportController controller = loader.getController();
         Stage dialog = new Stage();
-        dialog.setTitle("Workload report");
-        dialog.setScene(new Scene(root));
+        dialog.setTitle("Relatório de carga horária");
+        Scene scene = new Scene(root);
+        dialog.setScene(scene);
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
         dialog.showAndWait();

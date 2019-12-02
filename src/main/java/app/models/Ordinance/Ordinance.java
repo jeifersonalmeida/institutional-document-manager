@@ -75,4 +75,7 @@ public class Ordinance extends Document {
     this.publicServants.add(publicServant);
   }
 
+  public boolean hasPublicServant(PublicServant servant){
+    return this.publicServants.contains(servant);
+  }
 }
