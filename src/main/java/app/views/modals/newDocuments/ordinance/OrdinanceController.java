@@ -25,7 +25,7 @@ public class OrdinanceController extends DocumentController {
   @FXML
   private DatePicker dpInitialValidity, dpFinalValidity;
   @FXML
-  private ComboBox cbSelectOrdinanceRevoke;
+  private ChoiceBox cbSelectOrdinanceRevoke;
   @FXML
   private Button btChooseFile, btSave, btPublish;
 

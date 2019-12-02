@@ -10,7 +10,7 @@ import java.util.List;
 public class PublicServant {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
 
     @Column
