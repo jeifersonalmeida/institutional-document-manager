@@ -4,8 +4,11 @@ import app.models.Announcement.Announcement;
 import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
+import app.models.PublicServant.PublicServant;
+import app.models.PublicServant.PublicServantDAO;
 import app.views.modals.newDocuments.DocumentController;
 import app.views.screens.documents.DocumentsController;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -16,7 +19,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class OrdinanceController extends DocumentController {
 
@@ -25,7 +30,7 @@ public class OrdinanceController extends DocumentController {
   @FXML
   private DatePicker dpInitialValidity, dpFinalValidity;
   @FXML
-  private ChoiceBox cbSelectOrdinanceRevoke;
+  private ChoiceBox<String> cbSelectOrdinanceRevoke;
   @FXML
   private Button btChooseFile, btSave, btPublish;
 
@@ -122,6 +127,9 @@ public class OrdinanceController extends DocumentController {
     ordinance.setWorkload(Double.parseDouble(tfWorkLoad.getText()));
     ordinance.setStartingDate(dpInitialValidity.getValue().toString());
     ordinance.setFinishingDate(dpInitialValidity.getValue().toString());
+    PublicServant publicServant = new PublicServantDAO().findAll().get(0);
+    System.out.println(publicServant.getName());
+    ordinance.addPublicServant(publicServant);
     ordinance.setStatus(Status.NOT_PUBLISHED);
 
     return ordinance;
@@ -133,6 +141,11 @@ public class OrdinanceController extends DocumentController {
 
   @FXML
   private void revokeOrdinance() {
+    List<String> subjectsOrdinances = new ArrayList();
+    ordinanceDAO.findAll().forEach(ordinance -> {
+      subjectsOrdinances.add(ordinance.getSubject());
+    });
+    cbSelectOrdinanceRevoke.setItems(FXCollections.observableArrayList(subjectsOrdinances));
     cbSelectOrdinanceRevoke.setDisable(!cbSelectOrdinanceRevoke.isDisable());
   }
 
