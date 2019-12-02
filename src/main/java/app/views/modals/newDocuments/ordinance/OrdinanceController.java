@@ -127,7 +127,9 @@ public class OrdinanceController extends DocumentController {
     ordinance.setWorkload(Double.parseDouble(tfWorkLoad.getText()));
     ordinance.setStartingDate(dpInitialValidity.getValue().toString());
     ordinance.setFinishingDate(dpInitialValidity.getValue().toString());
-    ordinance.addPublicServant(new PublicServantDAO().findAll().get(0));
+    PublicServant publicServant = new PublicServantDAO().findAll().get(0);
+    System.out.println(publicServant.getName());
+    ordinance.addPublicServant(publicServant);
     ordinance.setStatus(Status.NOT_PUBLISHED);
 
     return ordinance;
