@@ -27,7 +27,7 @@
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 
             <!-- create https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html -->
-            <property name="hbm2ddl.auto" value="update or create or validate or create-drop" />
+            <property name="hbm2ddl.auto" value="update or create or validate" />
 
 
 
