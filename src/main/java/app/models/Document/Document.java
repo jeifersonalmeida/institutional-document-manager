@@ -6,7 +6,7 @@ import javax.persistence.*;
 public abstract class Document {
 
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue
   private long id;
   private String number;
   private String publicationDate;
