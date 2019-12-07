@@ -38,7 +38,7 @@
             <Insets bottom="10.0" />
          </VBox.margin>
          <children>
-            <TextField prefHeight="30.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
+            <TextField fx:id="tfSearchDocuments" prefHeight="30.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>

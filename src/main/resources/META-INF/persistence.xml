@@ -29,8 +29,6 @@
             <!-- create https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html -->
             <property name="hbm2ddl.auto" value="update or create or validate" />
 
-
-
 <!--            <property name="hibernate.archive.autodetection" value="class" />-->
 <!--            &lt;!&ndash; Propriedades JDBC &ndash;&gt;-->
 <!--            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />-->

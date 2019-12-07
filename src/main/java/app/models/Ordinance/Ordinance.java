@@ -4,6 +4,7 @@ import app.models.Document.Document;
 import app.models.PublicServant.PublicServant;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +14,11 @@ public class Ordinance extends Document {
   private double workload;
   private String startingDate;
   private String finishingDate;
-
   @Enumerated(EnumType.STRING)
   private OrdinanceType type;
-
   @ManyToMany
   private List<PublicServant> publicServants = new ArrayList<>();
+  private Long idOrdinanceToRevoke;
 
   public Ordinance() {}
 
@@ -76,12 +76,24 @@ public class Ordinance extends Document {
   }
 
   public boolean hasPublicServant(PublicServant servant){
-//    return this.publicServants.contains(servant);
     for (PublicServant publicServant : publicServants) {
       if (publicServant.getId() == servant.getId()) {
         return true;
       }
     }
     return false;
+  }
+
+  public long getIdOrdinanceToRevoke() {
+    return idOrdinanceToRevoke;
+  }
+
+  public void setIdOrdinanceToRevoke(long idOrdinanceToRevoke) {
+    this.idOrdinanceToRevoke = idOrdinanceToRevoke;
+  }
+
+  @Override
+  public String toString() {
+    return getSubject();
   }
 }

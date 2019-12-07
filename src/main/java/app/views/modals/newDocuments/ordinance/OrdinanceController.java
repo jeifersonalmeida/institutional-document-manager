@@ -1,27 +1,31 @@
 package app.views.modals.newDocuments.ordinance;
 
-import app.models.Announcement.Announcement;
 import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
 import app.models.PublicServant.PublicServant;
-import app.models.PublicServant.PublicServantDAO;
 import app.views.modals.newDocuments.DocumentController;
+import app.views.modals.newDocuments.ordinance.selectPublicServants.SelectPublicServantsController;
 import app.views.screens.documents.DocumentsController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class OrdinanceController extends DocumentController {
 
@@ -30,7 +34,9 @@ public class OrdinanceController extends DocumentController {
   @FXML
   private DatePicker dpInitialValidity, dpFinalValidity;
   @FXML
-  private ChoiceBox<String> cbSelectOrdinanceRevoke;
+  private ChoiceBox<Ordinance> cbSelectOrdinanceRevoke;
+  @FXML
+  private ListView<PublicServant> lvPublicServants;
   @FXML
   private Button btChooseFile, btSave, btPublish;
 
@@ -38,8 +44,35 @@ public class OrdinanceController extends DocumentController {
 
   private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
 
+  private List<PublicServant> publicServants = new ArrayList<>();
+
   public OrdinanceController() {
 
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+  }
+
+  @FXML
+  private void btSelectPublicServants() {
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/views/modals/newDocuments/ordinance/selectPublicServants/SelectPublicServants.fxml"));
+    Parent root = null;
+    try {
+      root = loader.load();
+    } catch (IOException ioe) {
+      ioe.printStackTrace();
+    }
+    SelectPublicServantsController spsc = loader.getController();
+    spsc.setPublicServants(publicServants);
+    spsc.setOrdinanceController(this);
+
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setResizable(false);
+    stage.showAndWait();
   }
 
   @FXML
@@ -127,9 +160,16 @@ public class OrdinanceController extends DocumentController {
     ordinance.setWorkload(Double.parseDouble(tfWorkLoad.getText()));
     ordinance.setStartingDate(dpInitialValidity.getValue().toString());
     ordinance.setFinishingDate(dpInitialValidity.getValue().toString());
-    PublicServant publicServant = new PublicServantDAO().findAll().get(0);
-    System.out.println(publicServant.getName());
-    ordinance.addPublicServant(publicServant);
+
+    Ordinance revokeOrdinance = cbSelectOrdinanceRevoke.getSelectionModel().getSelectedItem();
+    if (revokeOrdinance != null) {
+      ordinance.setIdOrdinanceToRevoke(revokeOrdinance.getId());
+    }
+
+    publicServants.forEach(ps -> {
+      ordinance.addPublicServant(ps);
+    });
+
     ordinance.setStatus(Status.NOT_PUBLISHED);
 
     return ordinance;
@@ -141,12 +181,12 @@ public class OrdinanceController extends DocumentController {
 
   @FXML
   private void revokeOrdinance() {
-    List<String> subjectsOrdinances = new ArrayList();
-    ordinanceDAO.findAll().forEach(ordinance -> {
-      subjectsOrdinances.add(ordinance.getSubject());
-    });
-    cbSelectOrdinanceRevoke.setItems(FXCollections.observableArrayList(subjectsOrdinances));
+    cbSelectOrdinanceRevoke.setItems(FXCollections.observableArrayList(ordinanceDAO.findAll()));
     cbSelectOrdinanceRevoke.setDisable(!cbSelectOrdinanceRevoke.isDisable());
   }
 
+  public void updatePublicServants() {
+    lvPublicServants.setItems(FXCollections.observableArrayList(publicServants));
+    lvPublicServants.refresh();
+  }
 }

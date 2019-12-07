@@ -15,6 +15,10 @@ public abstract class Document {
   private Status status;
   private String filePath;
 
+  public long getId() {
+    return id;
+  }
+
   public String getNumber() {
       return number;
   }
