@@ -64,4 +64,8 @@ public class PublicServant {
         return total;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

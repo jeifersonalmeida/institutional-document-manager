@@ -15,9 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 public class AnnouncementController extends DocumentController {
 
@@ -31,6 +33,11 @@ public class AnnouncementController extends DocumentController {
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
 
   public AnnouncementController() {
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+
   }
 
   @FXML
