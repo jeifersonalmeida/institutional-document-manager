@@ -54,7 +54,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnImportCSV" layoutX="812.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnImportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de CSV" textFill="#444444">
+            <Button fx:id="btnImportCSV" layoutX="812.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnImportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de XLSX" textFill="#444444">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
