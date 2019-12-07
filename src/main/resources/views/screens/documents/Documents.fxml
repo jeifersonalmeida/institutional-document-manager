@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="container" stylesheets="@Documents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.views.screens.documents.DocumentsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="container" stylesheets="@Documents.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.views.screens.documents.DocumentsController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -53,7 +54,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="812.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de CSV" textFill="#444444">
+            <Button fx:id="btnImportCSV" layoutX="812.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnImportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de CSV" textFill="#444444">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -61,7 +62,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="818.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Exportar para CSV">
+            <Button fx:id="btnExportCSV" layoutX="818.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnExportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Exportar para CSV">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

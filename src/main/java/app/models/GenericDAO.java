@@ -66,4 +66,13 @@ public class GenericDAO<T> {
   public List<T> findAll(){
     return (List<T>) entityManager.createQuery("Select t from " + type.getSimpleName() + " t").getResultList();
   }
+
+  public void saveAll(List<T> entities){
+    EntityManager em = entityManager;
+      em.getTransaction().begin();
+    for (T entity : entities) {
+      em.persist(entity);
+    }
+      em.getTransaction().commit();
+  }
 }
