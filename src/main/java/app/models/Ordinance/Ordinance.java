@@ -76,6 +76,9 @@ public class Ordinance extends Document {
   }
 
   public boolean hasPublicServant(PublicServant servant){
+    if (servant == null) {
+      return false;
+    }
     for (PublicServant publicServant : publicServants) {
       if (publicServant.getId() == servant.getId()) {
         return true;
