@@ -282,7 +282,7 @@ public class DocumentsController implements Initializable {
         File myFile = new File(location);
         Desktop.getDesktop().open(myFile);
       } catch (IOException ex) {
-        // no application registered for PDFs
+        // no application registered
         System.out.println("Damm!");
       }
     }

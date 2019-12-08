@@ -1,5 +1,7 @@
 package app;
 
+import app.models.utils.DocumentType;
+import app.models.utils.PDFCopier;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
