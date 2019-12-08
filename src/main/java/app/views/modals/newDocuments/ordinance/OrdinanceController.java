@@ -49,6 +49,8 @@ public class OrdinanceController extends DocumentController {
 
   private DocumentsController documentsController;
 
+  private String path = "";
+
   public OrdinanceController() {
 
   }
@@ -132,6 +134,7 @@ public class OrdinanceController extends DocumentController {
   @FXML
   private void btChooseFile() throws IOException {
     String path = PDFCopier.copyPDF(DocumentType.ORDINANCE);
+    this.path = path;
     btChooseFile.setText(path);
   }
 
@@ -155,6 +158,7 @@ public class OrdinanceController extends DocumentController {
     if (ordinance == null) {
       ordinance = getOrdinance();
     }
+
     ordinanceDAO.save(ordinance);
 
     updateController();
@@ -162,7 +166,9 @@ public class OrdinanceController extends DocumentController {
   }
 
   private void updateController() {
-   this.documentsController.refresh();
+    if (this.documentsController != null) {
+      this.documentsController.refresh();
+    }
   }
 
   private void closeModal() {
@@ -205,6 +211,7 @@ public class OrdinanceController extends DocumentController {
     });
 
     ordinance.setStatus(Status.NOT_PUBLISHED);
+    ordinance.setFilePath(path);
 
     return ordinance;
   }

@@ -67,7 +67,7 @@ public class DocumentsController {
 
   @FXML
   public void initialize() {
-    documentsListView.setCellFactory(x -> new DocumentCellController());
+    documentsListView.setCellFactory(x -> new DocumentCellController(this));
 
     typeFilters.put("Todos", DocumentTypeFilter.ALL);
     typeFilters.put("Portarias", DocumentTypeFilter.ORDINANCE);

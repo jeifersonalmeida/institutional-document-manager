@@ -4,6 +4,8 @@ import app.models.Announcement.Announcement;
 import app.models.Announcement.AnnouncementDAO;
 import app.models.Document.Status;
 import app.models.utils.DateTransformer;
+import app.models.utils.DocumentType;
+import app.models.utils.PDFCopier;
 import app.views.modals.newDocuments.DocumentController;
 import app.views.screens.documents.DocumentsController;
 import javafx.fxml.FXML;
@@ -27,12 +29,13 @@ public class AnnouncementController extends DocumentController {
   @FXML
   private Button btChooseFile, btSave, btPublish;
 
-  private File file;
-
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
-  private boolean isToViewOnly;
+
+  private boolean isToEdit = false;
 
   private DocumentsController documentsController;
+
+  private String path = "";
 
   public AnnouncementController() {
   }
@@ -46,6 +49,8 @@ public class AnnouncementController extends DocumentController {
       tfNumber.setText(announcement.getNumber());
       tfSubject.setText(announcement.getSubject());
       tfDescription.setText(announcement.getDescription());
+      path = announcement.getFilePath();
+      this.isToEdit = true;
     }
   }
 
@@ -59,16 +64,10 @@ public class AnnouncementController extends DocumentController {
   }
 
   @FXML
-  private void btChooseFile() {
-    FileChooser fc = new FileChooser();
-    fc.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
-        new FileChooser.ExtensionFilter("DOC Files", "*.docx"));
-    File file = fc.showOpenDialog(btChooseFile.getScene().getWindow());
-    if (file != null) {
-      this.file = file;
-      btChooseFile.setText(file.getName());
-    }
+  private void btChooseFile() throws IOException {
+    String path = PDFCopier.copyPDF(DocumentType.ORDINANCE);
+    this.path = path;
+    btChooseFile.setText(path);
   }
 
   @FXML
@@ -91,21 +90,20 @@ public class AnnouncementController extends DocumentController {
     if (announcement == null) {
       announcement = getAnnouncement();
     }
-    if (file != null) {
-      try {
-        announcement.setFilePath(saveFile(file).toString());
-      } catch (IOException ioe) {
-        ioe.printStackTrace();
-      }
+    if (!isToEdit) {
+      announcementDAO.save(announcement);
+    } {
+      announcementDAO.edit(announcement);
     }
-    announcementDAO.save(announcement);
 
     updateController();
     closeModal();
   }
 
   private void updateController() {
-    this.documentsController.refresh();
+    if (this.documentsController != null) {
+      this.documentsController.refresh();
+    }
   }
 
   private void closeModal() {
@@ -133,12 +131,9 @@ public class AnnouncementController extends DocumentController {
     announcement.setSubject(tfSubject.getText());
     announcement.setDescription(tfDescription.getText());
     announcement.setStatus(Status.NOT_PUBLISHED);
+    announcement.setFilePath(path);
 
     return announcement;
-  }
-
-  private Path saveFile(File file) throws IOException {
-    return Files.copy(file.toPath(), new File(file.getName()).toPath());
   }
 
   public void setDocumentsController(DocumentsController documentsController) {
