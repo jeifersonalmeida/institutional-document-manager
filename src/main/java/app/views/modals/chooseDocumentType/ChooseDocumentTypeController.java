@@ -1,5 +1,8 @@
 package app.views.modals.chooseDocumentType;
 
+import app.views.modals.newDocuments.announcement.AnnouncementController;
+import app.views.modals.newDocuments.ordinance.OrdinanceController;
+import app.views.screens.documents.DocumentsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +25,8 @@ public class ChooseDocumentTypeController implements Initializable {
 
   private ObservableList<String> avaiableTypes = FXCollections.observableArrayList();
 
+  private DocumentsController parent;
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     avaiableTypes.addAll(
@@ -37,15 +42,25 @@ public class ChooseDocumentTypeController implements Initializable {
     Parent newDocument = null;
     Stage newDocumentStage = new Stage();
 
+    FXMLLoader loader;
+
     switch (sltChooseDocumentType.getSelectionModel().getSelectedItem()) {
       case "Comunicado":
-        newDocument = FXMLLoader.load(
-            getClass().getResource("/views/modals/newDocuments/announcement/Announcement.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/views/modals/newDocuments/announcement/Announcement.fxml"));
+        newDocument = loader.load();
+
+        AnnouncementController controller = loader.getController();
+        controller.setDocumentsController(this.parent);
+
         newDocumentStage.setTitle("Novo Comunicado");
         break;
       case "Portaria":
-        newDocument = FXMLLoader.load(
-            getClass().getResource("/views/modals/newDocuments/ordinance/Ordinance.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/views/modals/newDocuments/ordinance/Ordinance.fxml"));
+        newDocument = loader.load();
+
+        OrdinanceController controller1 = loader.getController();
+        controller1.setDocumentsController(this.parent);
+
         newDocumentStage.setTitle("Nova Portaria");
         break;
       case "Projeto de Ensino":
@@ -68,4 +83,7 @@ public class ChooseDocumentTypeController implements Initializable {
     newDocumentStage.show();
   }
 
+  public void setParent(DocumentsController parent) {
+    this.parent = parent;
+  }
 }

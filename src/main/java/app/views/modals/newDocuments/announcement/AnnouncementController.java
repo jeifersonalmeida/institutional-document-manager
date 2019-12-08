@@ -3,6 +3,7 @@ package app.views.modals.newDocuments.announcement;
 import app.models.Announcement.Announcement;
 import app.models.Announcement.AnnouncementDAO;
 import app.models.Document.Status;
+import app.models.utils.DateTransformer;
 import app.views.modals.newDocuments.DocumentController;
 import app.views.screens.documents.DocumentsController;
 import javafx.fxml.FXML;
@@ -30,6 +31,8 @@ public class AnnouncementController extends DocumentController {
 
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
   private boolean isToViewOnly;
+
+  private DocumentsController documentsController;
 
   public AnnouncementController() {
   }
@@ -102,14 +105,7 @@ public class AnnouncementController extends DocumentController {
   }
 
   private void updateController() {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/screens/documents/Documents.fxml"));
-    try {
-      loader.load();
-    } catch (IOException ioe) {
-      ioe.printStackTrace();
-    }
-    DocumentsController dc = loader.getController();
-    dc.refresh();
+    this.documentsController.refresh();
   }
 
   private void closeModal() {
@@ -133,7 +129,7 @@ public class AnnouncementController extends DocumentController {
   private Announcement getAnnouncement() {
     Announcement announcement = new Announcement();
     announcement.setNumber(tfNumber.getText());
-    announcement.setPublicationDate(new Date().toString());
+    announcement.setPublicationDate(DateTransformer.dateToString(new Date()));
     announcement.setSubject(tfSubject.getText());
     announcement.setDescription(tfDescription.getText());
     announcement.setStatus(Status.NOT_PUBLISHED);
@@ -143,5 +139,9 @@ public class AnnouncementController extends DocumentController {
 
   private Path saveFile(File file) throws IOException {
     return Files.copy(file.toPath(), new File(file.getName()).toPath());
+  }
+
+  public void setDocumentsController(DocumentsController documentsController) {
+    this.documentsController = documentsController;
   }
 }

@@ -33,25 +33,27 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="30.0" prefWidth="200.0" VBox.vgrow="NEVER">
+      <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
          <children>
-            <TextField fx:id="tfSearchDocuments" prefHeight="30.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
+            <TextField fx:id="tfSearchDocuments" onKeyReleased="#tfSearchDocuments_keyReleased" prefHeight="30.0" prefWidth="432.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets right="10.0" />
+                  <Insets />
                </HBox.margin>
                <font>
-                  <Font name="Ubuntu" size="13.0" />
+                  <Font size="13.0" />
                </font>
             </TextField>
+            <ComboBox fx:id="cbDocumentType" onAction="#cbDocumentType_action" prefHeight="34.0" prefWidth="134.0" />
+            <ComboBox fx:id="cbOrder" onAction="#cbOrder_action" prefHeight="35.0" prefWidth="116.0" />
             <Button fx:id="bttNewDocument" mnemonicParsing="false" onAction="#bttNewDocument" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Novo Documento" textFill="#444444" wrapText="true" HBox.hgrow="NEVER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets right="10.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
             <Button fx:id="btnImportCSV" layoutX="812.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnImportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Importar de XLSX" textFill="#444444">
@@ -59,7 +61,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets right="10.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
             <Button fx:id="btnExportCSV" layoutX="818.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnExportCSV_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Exportar para CSV">
@@ -67,7 +69,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
                <HBox.margin>
-                  <Insets right="10.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
             <Button fx:id="btnServants" layoutX="914.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnServants_click" prefHeight="30.0" style="-fx-background-color: #ddd;" text="Servidores">

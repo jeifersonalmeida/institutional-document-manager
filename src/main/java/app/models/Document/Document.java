@@ -1,6 +1,10 @@
 package app.models.Document;
 
+import app.models.utils.DateTransformer;
+
 import javax.persistence.*;
+import java.text.ParseException;
+import java.util.Date;
 
 @MappedSuperclass
 public abstract class Document {
@@ -57,6 +61,10 @@ public abstract class Document {
 
   public void setFilePath(String filePath) {
       this.filePath = filePath;
+  }
+
+  public String getPublicationDateFormatted() {
+      return DateTransformer.StringFormatter(this.publicationDate);
   }
 
 }
