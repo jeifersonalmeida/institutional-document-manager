@@ -6,6 +6,8 @@ import app.models.Ordinance.OrdinanceDAO;
 import app.models.Ordinance.OrdinanceType;
 import app.models.PublicServant.PublicServant;
 import app.models.utils.DateTransformer;
+import app.models.utils.DocumentType;
+import app.models.utils.PDFCopier;
 import app.views.modals.newDocuments.DocumentController;
 import app.views.modals.newDocuments.ordinance.selectPublicServants.SelectPublicServantsController;
 import app.views.screens.documents.DocumentsController;
@@ -15,14 +17,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,8 +42,6 @@ public class OrdinanceController extends DocumentController {
   private ListView<PublicServant> lvPublicServants;
   @FXML
   private Button btSelectServants, btChooseFile, btSave, btPublish;
-
-  private File file;
 
   private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
 
@@ -133,16 +130,9 @@ public class OrdinanceController extends DocumentController {
   }
 
   @FXML
-  private void btChooseFile() {
-    FileChooser fc = new FileChooser();
-    fc.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
-        new FileChooser.ExtensionFilter("DOC Files", "*.docx"));
-    File file = fc.showOpenDialog(btChooseFile.getScene().getWindow());
-    if (file != null) {
-      this.file = file;
-      btChooseFile.setText(file.getName());
-    }
+  private void btChooseFile() throws IOException {
+    String path = PDFCopier.copyPDF(DocumentType.ORDINANCE);
+    btChooseFile.setText(path);
   }
 
   @FXML
@@ -164,13 +154,6 @@ public class OrdinanceController extends DocumentController {
 
     if (ordinance == null) {
       ordinance = getOrdinance();
-    }
-    if (file != null) {
-      try {
-        ordinance.setFilePath(saveFile(file).toString());
-      } catch (IOException ioe) {
-        ioe.printStackTrace();
-      }
     }
     ordinanceDAO.save(ordinance);
 
@@ -224,10 +207,6 @@ public class OrdinanceController extends DocumentController {
     ordinance.setStatus(Status.NOT_PUBLISHED);
 
     return ordinance;
-  }
-
-  private Path saveFile(File file) throws IOException {
-    return Files.copy(file.toPath(), new File(file.getName()).toPath());
   }
 
   @FXML
