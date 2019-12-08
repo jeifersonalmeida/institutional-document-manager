@@ -48,7 +48,7 @@ public abstract class DateTransformer {
     try {
       int index = properString.size() >= 5 ? 2 : 1;
 
-      properString.set(index, months.get(properString.get(index).substring(0, 3)).toString());
+      properString.set(index, String.format("%02d", months.get(properString.get(index).substring(0, 3))));
 
       List<String> list = new ArrayList<>();
       list.add(properString.get(properString.size()-1).replace(".", ""));

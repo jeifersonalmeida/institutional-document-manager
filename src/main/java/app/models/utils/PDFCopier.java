@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class PDFCopier {
-  private static final String baseDirectory = new JFileChooser().getFileSystemView().getDefaultDirectory() + "/IDM/";
+  private static final String baseDirectory = new JFileChooser().getFileSystemView().getDefaultDirectory() + File.separator + "IDM" + File.separator;
   private static DocumentType type;
 
   private static String copyFile(String source, String destination) throws IOException {
-    String file = destination + "/" + generateFileName();
+    String file = destination + File.separator + generateFileName();
 
     Files.copy(new File(source).toPath(), new File(file).toPath(), StandardCopyOption.REPLACE_EXISTING);
     return file;
