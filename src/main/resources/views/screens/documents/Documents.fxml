@@ -38,12 +38,12 @@
             <Insets bottom="10.0" />
          </VBox.margin>
          <children>
-            <TextField fx:id="tfSearchDocuments" prefHeight="30.0" prefWidth="432.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
+            <TextField fx:id="tfSearchDocuments" onKeyReleased="#tfSearchDocuments_keyReleased" prefHeight="30.0" prefWidth="432.0" promptText="Buscar documento" style="-fx-background-color: #ddd;" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <font>
-                  <Font name="Ubuntu" size="13.0" />
+                  <Font size="13.0" />
                </font>
             </TextField>
             <ComboBox fx:id="cbDocumentType" onAction="#cbDocumentType_action" prefHeight="34.0" prefWidth="134.0" />

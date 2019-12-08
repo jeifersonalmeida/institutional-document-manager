@@ -11,6 +11,7 @@ import app.models.TeachingProject.TeachingProject;
 import app.models.TeachingProject.TeachingProjectDAO;
 import app.models.utils.filter.DocumentTypeFilter;
 import app.models.utils.filter.DocumentOrderFilter;
+import app.views.modals.chooseDocumentType.ChooseDocumentTypeController;
 import app.views.modals.documentChooserCSV.DocumentChooserCSVController;
 import app.views.screens.documents.documentsListView.DocumentCellController;
 import javafx.collections.FXCollections;
@@ -46,7 +47,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DocumentsController implements Initializable {
+public class DocumentsController {
 
   @FXML
   private Button bttNewDocument, btnServants, btnImportCSV, btnExportCSV;
@@ -57,19 +58,15 @@ public class DocumentsController implements Initializable {
   @FXML
   private ComboBox<String> cbDocumentType, cbOrder;
 
-  private List<Document> documents = new ArrayList<>();
   private ObservableList<Document> documentsObservable = FXCollections.observableArrayList();
 
-  private AnnouncementDAO announcementDAO = new AnnouncementDAO();
-  private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
-  private TeachingProjectDAO teachingProjectDAO = new TeachingProjectDAO();
   private String csvType;
 
   private Map<String, DocumentTypeFilter> typeFilters = new HashMap<>();
   private Map<String, DocumentOrderFilter> orderFilters = new HashMap<>();
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @FXML
+  public void initialize() {
     documentsListView.setCellFactory(x -> new DocumentCellController());
 
     typeFilters.put("Todos", DocumentTypeFilter.ALL);
@@ -79,7 +76,6 @@ public class DocumentsController implements Initializable {
     typeFilters.put("Projetos Institucionais", DocumentTypeFilter.INSTITUTIONAL_PROJECT);
     typeFilters.put("Projetos de Ensino", DocumentTypeFilter.TEACHING_PROJECT);
 
-    documentsListView.setItems(this.documentsObservable);
     refresh();
 
     ObservableList<String> filterList = FXCollections.observableArrayList(typeFilters.keySet());
@@ -95,32 +91,28 @@ public class DocumentsController implements Initializable {
     cbOrder.setItems(filterList);
     cbOrder.setValue(filterList.get(1));
     cbOrder_action();
-
-    tfSearchDocuments.textProperty().addListener((observable, oldValue, newValue) -> {
-      filterDocuments(newValue);
-    });
-  }
-
-  public void getDocuments() {
-    documents.clear();
-    documents.addAll(announcementDAO.findAll());
-    documents.addAll(ordinanceDAO.findAll());
-    documents.addAll(teachingProjectDAO.findAll());
   }
 
   public void refresh() {
-    getDocuments();
-    filterDocuments(tfSearchDocuments.getText());
+    List<Document> documents = new ArrayList<>();
+    documents.addAll(new AnnouncementDAO().findAll());
+    documents.addAll(new OrdinanceDAO().findAll());
+    documents.addAll(new TeachingProjectDAO().findAll());
+
+    documentsObservable = FXCollections.observableArrayList(documents);
+    documentsListView.setItems(documentsObservable);
     documentsListView.refresh();
   }
 
-  private void filterDocuments(String value) {
-    documentsObservable.clear();
-    documents.forEach(d -> {
-      if (d.getSubject().contains(value)) {
-        documentsObservable.add(d);
-      }
-    });
+  @FXML
+  private void tfSearchDocuments_keyReleased() {
+    String value = tfSearchDocuments.getText();
+
+    documentsListView.setItems(documentsObservable.filtered(d -> d.getNumber().contains(value) ||
+        d.getPublicationDate().contains(value) ||
+        d.getSubject().contains(value) ||
+        d.getStatus().toString().contains(value)));
+
     documentsListView.refresh();
   }
 
@@ -138,11 +130,15 @@ public class DocumentsController implements Initializable {
   }
 
   public void bttNewDocument() throws IOException {
-    VBox newDocumentModal = (VBox) FXMLLoader.load(
-        getClass().getResource("/views/modals/chooseDocumentType/ChooseDocumentType.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/chooseDocumentType/ChooseDocumentType.fxml"));
+    Parent root = loader.load();
+
+    ChooseDocumentTypeController controller = loader.getController();
+    controller.setParent(this);
+
     Stage stage = new Stage();
     stage.setTitle("New Document");
-    stage.setScene(new Scene(newDocumentModal));
+    stage.setScene(new Scene(root));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setResizable(false);
     stage.showAndWait();
