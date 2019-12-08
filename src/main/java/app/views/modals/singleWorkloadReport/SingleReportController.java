@@ -82,7 +82,7 @@ public class SingleReportController {
         tableColumnOrdinance.setCellValueFactory(new PropertyValueFactory<>("subject"));
         tableColumnWorkload.setCellValueFactory(new PropertyValueFactory<>("workload"));
 
-        tableViewOrdinances.setItems(ordinances);
+        tableViewOrdinances.setItems(ordinances.filtered(o -> o.hasPublicServant(servant)));
         tableViewOrdinances.setPlaceholder(new Label("Nenhuma Portaria registrada"));
 
     }
