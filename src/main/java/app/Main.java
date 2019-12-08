@@ -1,5 +1,6 @@
 package app;
 
+import app.models.utils.DateTransformer;
 import app.models.utils.DocumentType;
 import app.models.utils.PDFCopier;
 import javafx.application.Application;

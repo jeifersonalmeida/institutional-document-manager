@@ -7,11 +7,12 @@ import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
 import app.models.Ordinance.OrdinanceType;
+import app.models.TeachingProject.TeachingProject;
 import app.models.TeachingProject.TeachingProjectDAO;
+import app.models.utils.filter.DocumentTypeFilter;
+import app.models.utils.filter.DocumentOrderFilter;
 import app.views.modals.documentChooserCSV.DocumentChooserCSVController;
-import app.views.modals.singleWorkloadReport.SingleReportController;
 import app.views.screens.documents.documentsListView.DocumentCellController;
-import com.sun.javafx.tk.FileChooserType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,10 +21,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -31,7 +32,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -42,12 +42,9 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class DocumentsController implements Initializable {
 
@@ -57,6 +54,8 @@ public class DocumentsController implements Initializable {
   private ListView<Document> documentsListView;
   @FXML
   private TextField tfSearchDocuments;
+  @FXML
+  private ComboBox<String> cbDocumentType, cbOrder;
 
   private List<Document> documents = new ArrayList<>();
   private ObservableList<Document> documentsObservable = FXCollections.observableArrayList();
@@ -66,12 +65,36 @@ public class DocumentsController implements Initializable {
   private TeachingProjectDAO teachingProjectDAO = new TeachingProjectDAO();
   private String csvType;
 
+  private Map<String, DocumentTypeFilter> typeFilters = new HashMap<>();
+  private Map<String, DocumentOrderFilter> orderFilters = new HashMap<>();
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     documentsListView.setCellFactory(x -> new DocumentCellController());
 
+    typeFilters.put("Todos", DocumentTypeFilter.ALL);
+    typeFilters.put("Portarias", DocumentTypeFilter.ORDINANCE);
+    typeFilters.put("Comunicados", DocumentTypeFilter.ANNOUNCEMENT);
+    typeFilters.put("Comissões", DocumentTypeFilter.COMMISSION);
+    typeFilters.put("Projetos Institucionais", DocumentTypeFilter.INSTITUTIONAL_PROJECT);
+    typeFilters.put("Projetos de Ensino", DocumentTypeFilter.TEACHING_PROJECT);
+
     documentsListView.setItems(this.documentsObservable);
     refresh();
+
+    ObservableList<String> filterList = FXCollections.observableArrayList(typeFilters.keySet());
+
+    cbDocumentType.setItems(filterList);
+    cbDocumentType.setValue(filterList.get(4));
+
+    orderFilters.put("Mais recente primeiro", DocumentOrderFilter.MOST_RECENT);
+    orderFilters.put("Mais antigo primeiro", DocumentOrderFilter.LEAST_RECENT);
+
+    filterList = FXCollections.observableArrayList(orderFilters.keySet());
+
+    cbOrder.setItems(filterList);
+    cbOrder.setValue(filterList.get(1));
+    cbOrder_action();
 
     tfSearchDocuments.textProperty().addListener((observable, oldValue, newValue) -> {
       filterDocuments(newValue);
@@ -291,4 +314,81 @@ public class DocumentsController implements Initializable {
   public void setCsvType(String csvType) {
     this.csvType = csvType;
   }
+
+  @FXML
+  public void cbDocumentType_action(){
+    this.documentsListView.setItems(this.documentsObservable.filtered(d -> checkDocumentType(d, typeFilters.get(cbDocumentType.getValue()))));
+    this.documentsListView.refresh();
+  }
+
+  private boolean checkDocumentType(Document document, DocumentTypeFilter filter){
+    switch (filter){
+      case ORDINANCE:
+        if(document instanceof Ordinance){
+          if(((Ordinance)document).getType() == OrdinanceType.ORDINANCE){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      case ANNOUNCEMENT:
+        if(document instanceof Announcement){
+          return true;
+        }
+        return false;
+      case COMMISSION:
+        if(document instanceof Ordinance){
+          if(((Ordinance)document).getType() == OrdinanceType.COMMISSION){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      case INSTITUTIONAL_PROJECT:
+        if(document instanceof Ordinance){
+          if(((Ordinance)document).getType() == OrdinanceType.INSTITUTIONAL_PROJECT){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      case TEACHING_PROJECT:
+        if(document instanceof TeachingProject){
+          return true;
+        }
+        return false;
+      case ALL:
+        return true;
+    }
+    return false;
+  }
+
+  @FXML
+  public void cbOrder_action(){
+    Comparator<Document> comparator = Comparator.comparing(Document::getPublicationDateFormatted, Comparator.naturalOrder());
+
+    switch (orderFilters.get(cbOrder.getValue())){
+      case MOST_RECENT:
+        comparator = comparator.reversed();
+    }
+
+    documentsObservable.sort(comparator);
+    documentsListView.refresh();
+  }
+
+//  @FXML
+//  public void filter(){
+//    String filterString = this.textFieldSearchbar.getText();
+//    System.out.println(filterString);
+//
+//    if(!filterString.equals("")){
+//      this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getRecord().contains(filterString) || p.getName().contains(filterString)));
+//      this.tableViewServants.refresh();
+//
+//      return;
+//    }
+//    this.tableViewServants.setItems(this.publicServants);
+//    this.tableViewServants.refresh();
+//
+//  }
 }
