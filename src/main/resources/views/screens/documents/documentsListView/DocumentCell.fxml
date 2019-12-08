@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListCell?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<fx:root styleClass="main-container" stylesheets="@DocumentCell.css" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="main-container" stylesheets="@DocumentCell.css" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <graphic>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
          <children>
-            <StackPane prefWidth="40.0" HBox.hgrow="NEVER">
+            <StackPane minWidth="-Infinity" prefWidth="40.0" HBox.hgrow="NEVER">
                <children>
                   <ImageView fx:id="type" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                      <image>
@@ -22,7 +25,7 @@
                   <Insets left="20.0" right="20.0" />
                </HBox.margin>
             </StackPane>
-            <StackPane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+            <StackPane maxWidth="1.7976931348623157E308" onMouseClicked="#viewDocument" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="subject" text="Assunto do Documento" textFill="#dddddd" StackPane.alignment="CENTER_LEFT">
                      <font>
@@ -36,7 +39,7 @@
                   <Insets />
                </HBox.margin>
             </StackPane>
-            <StackPane layoutX="50.0" layoutY="10.0" HBox.hgrow="SOMETIMES">
+            <StackPane layoutX="50.0" layoutY="10.0" minWidth="-Infinity" HBox.hgrow="NEVER">
                <children>
                   <Label fx:id="publishDate" text="Publicado em 10/11/2017" textFill="#dddddd" StackPane.alignment="CENTER_LEFT">
                      <font>
@@ -51,7 +54,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </StackPane>
-            <StackPane layoutX="330.0" layoutY="10.0" HBox.hgrow="SOMETIMES">
+            <StackPane layoutX="330.0" layoutY="10.0" minWidth="170.0" HBox.hgrow="NEVER">
                <children>
                   <Label fx:id="status" text="Pendente de documentos" textFill="#dddddd" StackPane.alignment="CENTER_LEFT">
                      <font>
@@ -66,9 +69,9 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </StackPane>
-            <StackPane prefWidth="40.0" HBox.hgrow="NEVER">
+            <StackPane minWidth="-Infinity" prefWidth="40.0" HBox.hgrow="NEVER">
                <children>
-                  <ImageView fx:id="view" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="view" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#viewDocumentFile" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../assets/icons/view-files.png" />
                      </image>
@@ -81,9 +84,9 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </StackPane>
-            <StackPane layoutX="370.0" layoutY="10.0" prefWidth="40.0">
+            <StackPane layoutX="370.0" layoutY="10.0" minWidth="-Infinity" prefWidth="40.0">
                <children>
-                  <ImageView fx:id="edit" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editDocument" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#editDocument" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../assets/icons/pencil-edit-button.png" />
                      </image>
@@ -96,9 +99,9 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </StackPane>
-            <StackPane layoutX="570.0" layoutY="10.0" prefWidth="40.0">
+            <StackPane layoutX="570.0" layoutY="10.0" minWidth="-Infinity" prefWidth="40.0">
                <children>
-                  <ImageView fx:id="publish" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="publish" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#publishDocument" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../assets/icons/untick.png" />
                      </image>
@@ -110,6 +113,18 @@
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
+            </StackPane>
+            <StackPane layoutX="570.0" layoutY="10.0" minWidth="-Infinity" prefWidth="40.0">
+               <children>
+                  <ImageView fx:id="remove" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#removeDocument" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../assets/icons/remove.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
             </StackPane>
          </children>
       </HBox>

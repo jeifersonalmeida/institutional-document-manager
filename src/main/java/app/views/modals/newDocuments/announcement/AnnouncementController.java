@@ -15,11 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class AnnouncementController extends DocumentController {
 
@@ -31,13 +29,30 @@ public class AnnouncementController extends DocumentController {
   private File file;
 
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
+  private boolean isToViewOnly;
 
   public AnnouncementController() {
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
+  @FXML
+  public void initialize() {
+  }
 
+  public void setFields(Announcement announcement) {
+    if (announcement != null) {
+      tfNumber.setText(announcement.getNumber());
+      tfSubject.setText(announcement.getSubject());
+      tfDescription.setText(announcement.getDescription());
+    }
+  }
+
+  public void setIsToViewOnly() {
+    tfNumber.setDisable(true);
+    tfSubject.setDisable(true);
+    tfDescription.setDisable(true);
+    btChooseFile.setVisible(false);
+    btSave.setVisible(false);
+    btPublish.setVisible(false);
   }
 
   @FXML

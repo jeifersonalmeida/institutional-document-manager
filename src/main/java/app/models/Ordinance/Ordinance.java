@@ -84,7 +84,7 @@ public class Ordinance extends Document {
     return false;
   }
 
-  public long getIdOrdinanceToRevoke() {
+  public Long getIdOrdinanceToRevoke() {
     return idOrdinanceToRevoke;
   }
 
