@@ -1,8 +1,8 @@
 package app.views.modals.newDocuments;
 
-import javafx.fxml.Initializable;
+import app.models.Document.Document;
 
-public abstract class DocumentController implements Initializable {
+public abstract class DocumentController {
 
   protected abstract boolean checkFields();
 }

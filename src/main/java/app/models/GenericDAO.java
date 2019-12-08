@@ -47,6 +47,18 @@ public class GenericDAO<T> {
     return true;
   }
 
+  public Boolean delete(long id){
+    EntityManager em = entityManager;
+    try {
+      em.getTransaction().begin();
+      entityManager.remove(find(id));
+      em.getTransaction().commit();
+    } catch (Exception ex) {
+      return false;
+    }
+    return true;
+  }
+
   public T edit(T entity) {
     EntityManager em = entityManager;
     try{

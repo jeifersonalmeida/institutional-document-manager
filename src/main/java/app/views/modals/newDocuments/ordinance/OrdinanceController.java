@@ -3,6 +3,7 @@ package app.views.modals.newDocuments.ordinance;
 import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
+import app.models.Ordinance.OrdinanceType;
 import app.models.PublicServant.PublicServant;
 import app.models.utils.DateTransformer;
 import app.views.modals.newDocuments.DocumentController;
@@ -20,13 +21,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class OrdinanceController extends DocumentController {
 
@@ -35,11 +34,15 @@ public class OrdinanceController extends DocumentController {
   @FXML
   private DatePicker dpInitialValidity, dpFinalValidity;
   @FXML
+  private CheckBox cbOrdinanceRevoke;
+  @FXML
   private ChoiceBox<Ordinance> cbSelectOrdinanceRevoke;
+  @FXML
+  private ChoiceBox<OrdinanceType> cbSelectType;
   @FXML
   private ListView<PublicServant> lvPublicServants;
   @FXML
-  private Button btChooseFile, btSave, btPublish;
+  private Button btSelectServants, btChooseFile, btSave, btPublish;
 
   private File file;
 
@@ -53,8 +56,59 @@ public class OrdinanceController extends DocumentController {
 
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
+  @FXML
+  public void initialize() {
+    cbSelectType.setItems(FXCollections.observableArrayList(OrdinanceType.values()));
+  }
+
+  public void setFields(Ordinance ordinance) {
+    if (ordinance != null) {
+      tfNumber.setText(ordinance.getNumber());
+      tfSubject.setText(ordinance.getSubject());
+      tfWorkLoad.setText(String.valueOf(ordinance.getWorkload()));
+      cbSelectType.setValue(ordinance.getType());
+
+//      dpInitialValidity.setValue();
+//      dpFinalValidity.setValue();
+
+      if (ordinance.getIdOrdinanceToRevoke() != null) {
+        Ordinance ordinanceToRevoke = ordinanceDAO.find(ordinance.getIdOrdinanceToRevoke());
+        if (ordinanceToRevoke != null) {
+          cbOrdinanceRevoke.setSelected(true);
+          cbSelectOrdinanceRevoke.setValue(ordinanceToRevoke);
+        } else {
+          cbOrdinanceRevoke.setSelected(false);
+        }
+      }
+
+      List<PublicServant> publicServants = new ArrayList<>();
+      ordinance.getPublicServants().forEachRemaining(o -> {
+        publicServants.add(o);
+      });
+      lvPublicServants.setItems(FXCollections.observableArrayList(publicServants));
+
+      if (ordinance.getFilePath() != null) {
+        File file = new File(ordinance.getFilePath());
+        if (file.exists()) {
+          btChooseFile.setText(file.getName());
+        }
+      }
+    }
+  }
+
+  public void setIsToViewOnly() {
+    tfNumber.setDisable(true);
+    tfSubject.setDisable(true);
+    tfWorkLoad.setDisable(true);
+    cbSelectType.setDisable(true);
+    dpInitialValidity.setDisable(true);
+    dpFinalValidity.setDisable(true);
+    cbOrdinanceRevoke.setDisable(true);
+    cbSelectOrdinanceRevoke.setDisable(true);
+    btSelectServants.setVisible(false);
+    btChooseFile.setVisible(false);
+    btSave.setVisible(false);
+    btPublish.setVisible(false);
   }
 
   @FXML
@@ -154,6 +208,7 @@ public class OrdinanceController extends DocumentController {
     ordinance.setPublicationDate(DateTransformer.dateToString(new Date()));
     ordinance.setSubject(tfSubject.getText());
     ordinance.setWorkload(Double.parseDouble(tfWorkLoad.getText()));
+    ordinance.setType(cbSelectType.getSelectionModel().getSelectedItem());
     ordinance.setStartingDate(dpInitialValidity.getValue().toString());
     ordinance.setFinishingDate(dpInitialValidity.getValue().toString());
 
