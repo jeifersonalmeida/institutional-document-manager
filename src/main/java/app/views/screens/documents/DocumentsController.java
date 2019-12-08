@@ -1,11 +1,15 @@
 package app.views.screens.documents;
 
+import app.models.Announcement.Announcement;
 import app.models.Announcement.AnnouncementDAO;
 import app.models.Document.Document;
+import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
 import app.models.Ordinance.OrdinanceType;
 import app.models.TeachingProject.TeachingProjectDAO;
+import app.views.modals.documentChooserCSV.DocumentChooserCSVController;
+import app.views.modals.singleWorkloadReport.SingleReportController;
 import app.views.screens.documents.documentsListView.DocumentCellController;
 import com.sun.javafx.tk.FileChooserType;
 import javafx.collections.FXCollections;
@@ -26,14 +30,18 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,6 +64,7 @@ public class DocumentsController implements Initializable {
   private AnnouncementDAO announcementDAO = new AnnouncementDAO();
   private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
   private TeachingProjectDAO teachingProjectDAO = new TeachingProjectDAO();
+  private String csvType;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -124,9 +133,9 @@ public class DocumentsController implements Initializable {
 //    scene.setCursor(Cursor.WAIT);
 //    stage.setResizable(false);
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("CSV");
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos CSV",
-        "*.csv", "*.xlsx"));
+    fileChooser.setTitle("XLSX");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos XLSX",
+        "*.xlsx"));
     stage.setScene(scene);
 //        stage.show();
     File selectedCSV = fileChooser.showOpenDialog(stage);
@@ -158,6 +167,7 @@ public class DocumentsController implements Initializable {
           ordinance.setPublicationDate(publicationDate);
           ordinance.setSubject(description);
           ordinance.setType(OrdinanceType.ORDINANCE);
+          ordinance.setStatus(Status.PUBLISHED);
           if(description.contains("comiss")) ordinance.setType(OrdinanceType.COMMISSION);
 
 //          System.out.println(ordinance.getNumber());
@@ -181,8 +191,104 @@ public class DocumentsController implements Initializable {
   }
 
   @FXML
-  public void btnExportCSV_click(){
+  public void btnExportCSV_click() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/modals/documentChooserCSV/DocumentChooserCSV.fxml"));
+    Parent root = loader.load();
+
+    DocumentChooserCSVController controller = loader.getController();
+    controller.setParentController(this);
+
+    Stage dialog = new Stage();
+    dialog.setTitle("Tipo");
+    dialog.setScene(new Scene(root));
+    dialog.initModality(Modality.APPLICATION_MODAL);
+    dialog.setResizable(false);
+    controller.setThisStage(dialog);
+    dialog.showAndWait();
+
+    Stage stage = new Stage();
+    Scene scene = new Scene(new AnchorPane(), 10, 10);
+
+    scene.setCursor(Cursor.WAIT);
+    stage.setResizable(false);
+    DirectoryChooser directoryChooser = new DirectoryChooser();
+    directoryChooser.setTitle("Salvar CSV");
+    stage.setScene(scene);
+//        stage.show();
+    File selectedDirectory = directoryChooser.showDialog(stage);
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+
+    String path = selectedDirectory + "/IDM_CSV_" + csvType + "_" + formatter.format(LocalDateTime.now()) + ".csv";
+
+    CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(path), CSVFormat.EXCEL.withHeader("Número", "Descrição", "Data publicação", "Status"));
+    List<Document> documents = new ArrayList<>();
+
+    documents.addAll(new OrdinanceDAO().findAll());
+    documents.addAll(new AnnouncementDAO().findAll());
+
+    for(Document document : documents){
+      System.out.println(csvType);
+      switch (csvType){
+        case "Portaria":
+          if(!(document instanceof Ordinance)){
+            continue;
+          }
+          if(((Ordinance) document).getType() != OrdinanceType.ORDINANCE){
+            continue;
+          }
+          break;
+        case "Comunicado":
+          if(!(document instanceof Announcement)){
+            continue;
+          }
+          break;
+        case "Comissão":
+          if(!(document instanceof Ordinance)){
+            continue;
+          }
+          if(((Ordinance) document).getType() != OrdinanceType.COMMISSION){
+            continue;
+          }
+          break;
+        case "Projeto institucional":
+          if(!(document instanceof Ordinance)){
+            continue;
+          }
+          if(((Ordinance) document).getType() != OrdinanceType.INSTITUTIONAL_PROJECT){
+            continue;
+          }
+          break;
+      }
+
+      String number = document.getNumber();
+      String subject = document.getSubject();
+      String pub = document.getPublicationDate();
+      String status = document.getStatus().toString();
+
+      csvPrinter.printRecord(number, subject, pub, status);
+
+    }
+
+    csvPrinter.flush();
+
+    openFile(path);
 
   }
 
+  private void openFile(String location){
+    if (Desktop.isDesktopSupported()) {
+      try {
+        File myFile = new File(location);
+        Desktop.getDesktop().open(myFile);
+      } catch (IOException ex) {
+        // no application registered for PDFs
+        System.out.println("Damm!");
+      }
+    }
+  }
+
+  public void setCsvType(String csvType) {
+    this.csvType = csvType;
+  }
 }
