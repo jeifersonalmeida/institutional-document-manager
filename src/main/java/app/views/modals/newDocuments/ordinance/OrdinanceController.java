@@ -4,6 +4,7 @@ import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
 import app.models.PublicServant.PublicServant;
+import app.models.utils.DateTransformer;
 import app.views.modals.newDocuments.DocumentController;
 import app.views.modals.newDocuments.ordinance.selectPublicServants.SelectPublicServantsController;
 import app.views.screens.documents.DocumentsController;
@@ -45,6 +46,8 @@ public class OrdinanceController extends DocumentController {
   private OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
 
   private List<PublicServant> publicServants = new ArrayList<>();
+
+  private DocumentsController documentsController;
 
   public OrdinanceController() {
 
@@ -122,14 +125,7 @@ public class OrdinanceController extends DocumentController {
   }
 
   private void updateController() {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/screens/documents/Documents.fxml"));
-    try {
-      loader.load();
-    } catch (IOException ioe) {
-      ioe.printStackTrace();
-    }
-    DocumentsController dc = loader.getController();
-    dc.refresh();
+   this.documentsController.refresh();
   }
 
   private void closeModal() {
@@ -155,7 +151,7 @@ public class OrdinanceController extends DocumentController {
   private Ordinance getOrdinance() {
     Ordinance ordinance = new Ordinance();
     ordinance.setNumber(tfNumber.getText());
-    ordinance.setPublicationDate(new Date().toString());
+    ordinance.setPublicationDate(DateTransformer.dateToString(new Date()));
     ordinance.setSubject(tfSubject.getText());
     ordinance.setWorkload(Double.parseDouble(tfWorkLoad.getText()));
     ordinance.setStartingDate(dpInitialValidity.getValue().toString());
@@ -188,5 +184,9 @@ public class OrdinanceController extends DocumentController {
   public void updatePublicServants() {
     lvPublicServants.setItems(FXCollections.observableArrayList(publicServants));
     lvPublicServants.refresh();
+  }
+
+  public void setDocumentsController(DocumentsController documentsController) {
+    this.documentsController = documentsController;
   }
 }
