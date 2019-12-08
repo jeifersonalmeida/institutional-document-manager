@@ -72,15 +72,13 @@ public class GeneralReportController {
 //        stage.show();
         File selectedDirectory = directoryChooser.showDialog(stage);
 
-        String source = createPdf();
-        String newFile = copyFile(source, selectedDirectory.getAbsolutePath());
-        openFile(newFile);
+        String source = createPdf(selectedDirectory.getAbsolutePath());
+        openFile(source);
         scene.setCursor(Cursor.DEFAULT);
         stage.close();
     }
 
-    private String createPdf() throws FileNotFoundException, DocumentException {
-        String baseDirectory = "./generated/generalReports/";
+    private String createPdf(String baseDirectory) throws FileNotFoundException, DocumentException {
         String location = baseDirectory + generateFileName();
 
         Document document = new Document();
@@ -116,13 +114,6 @@ public class GeneralReportController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
         return "generalReport_" + formatter.format(LocalDateTime.now()) + ".pdf";
-    }
-
-    private String copyFile(String source, String destination) throws IOException {
-        String file = destination + "/" + generateFileName();
-
-        Files.copy(new File(source).toPath(), new File(file).toPath(), StandardCopyOption.REPLACE_EXISTING);
-        return file;
     }
 
     private void openFile(String location){

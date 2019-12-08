@@ -135,7 +135,7 @@ public class ServantsController {
     @FXML
     public void filter(){
         String filterString = this.textFieldSearchbar.getText();
-        System.out.println(filterString);
+//        System.out.println(filterString);
 
         if(!filterString.equals("")){
             this.tableViewServants.setItems(this.publicServants.filtered(p-> p.getRecord().contains(filterString) || p.getName().contains(filterString)));
