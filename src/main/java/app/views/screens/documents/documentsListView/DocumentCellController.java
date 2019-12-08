@@ -10,6 +10,7 @@ import app.models.TeachingProject.TeachingProject;
 import app.models.TeachingProject.TeachingProjectDAO;
 import app.views.modals.newDocuments.announcement.AnnouncementController;
 import app.views.modals.newDocuments.ordinance.OrdinanceController;
+import app.views.screens.documents.DocumentsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,9 +39,12 @@ public class DocumentCellController extends ListCell<Document> {
   @FXML
   private Label status;
   @FXML
-  private ImageView view, remove, publish;
+  private ImageView view, remove, publish, editDocument;
 
-  public DocumentCellController() {
+  private DocumentsController documentsController;
+
+  public DocumentCellController(DocumentsController documentsController) {
+    this.documentsController = documentsController;
     loadFXML();
   }
 
@@ -84,7 +88,15 @@ public class DocumentCellController extends ListCell<Document> {
       if (document.getStatus() == Status.PUBLISHED) {
         remove.setDisable(true);
         remove.setVisible(false);
+        editDocument.setDisable(true);
+        editDocument.setVisible(false);
         publish.setImage(new Image("/assets/icons/tick.png"));
+      } else {
+        remove.setDisable(false);
+        remove.setVisible(true);
+        editDocument.setDisable(false);
+        editDocument.setVisible(true);
+        publish.setImage((new Image("/assets/icons/untick.png")));
       }
 
       setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -93,8 +105,19 @@ public class DocumentCellController extends ListCell<Document> {
 
   @FXML
   private void publishDocument() {
-    getItem().setStatus(Status.PUBLISHED);
+    Document document = getItem();
+    document.setStatus(Status.PUBLISHED);
+    if (document == null) {
+      return;
+    } else if (document instanceof Announcement) {
+      AnnouncementDAO announcementDAO = new AnnouncementDAO();
+      announcementDAO.edit((Announcement) document);
+    } else if (document instanceof Ordinance) {
+      OrdinanceDAO ordinanceDAO = new OrdinanceDAO();
+      ordinanceDAO.edit((Ordinance) document);
+    }
     updateItem(getItem(), false);
+    this.documentsController.refresh();
   }
 
   @FXML
@@ -112,6 +135,7 @@ public class DocumentCellController extends ListCell<Document> {
       TeachingProjectDAO teachingProjectDAO = new TeachingProjectDAO();
       teachingProjectDAO.delete(document.getId());
     }
+    this.documentsController.refresh();
   }
 
   @FXML
@@ -178,6 +202,7 @@ public class DocumentCellController extends ListCell<Document> {
       parent = loader.load();
       AnnouncementController announcementController = loader.getController();
       announcementController.setFields((Announcement) document);
+      announcementController.setDocumentsController(this.documentsController);
       stage.setTitle("Editar comunicado");
     } else if (document instanceof Ordinance) {
       FXMLLoader loader = new FXMLLoader(
@@ -185,6 +210,7 @@ public class DocumentCellController extends ListCell<Document> {
       parent = loader.load();
       OrdinanceController ordinanceController = loader.getController();
       ordinanceController.setFields((Ordinance) document);
+      ordinanceController.setDocumentsController(this.documentsController);
       stage.setTitle("Editar portaria");
     }
 

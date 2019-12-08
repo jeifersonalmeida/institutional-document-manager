@@ -85,6 +85,6 @@ public class GenericDAO<T> {
     for (T entity : entities) {
       em.persist(entity);
     }
-      em.getTransaction().commit();
+    em.getTransaction().commit();
   }
 }
