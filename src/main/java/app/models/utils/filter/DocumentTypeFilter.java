@@ -6,7 +6,4 @@ public enum DocumentTypeFilter {
   ANNOUNCEMENT,
   COMMISSION,
   INSTITUTIONAL_PROJECT,
-  TEACHING_PROJECT
-
-
 }
