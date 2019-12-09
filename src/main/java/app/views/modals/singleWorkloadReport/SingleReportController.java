@@ -84,7 +84,6 @@ public class SingleReportController {
 
         tableViewOrdinances.setItems(ordinances.filtered(o -> o.hasPublicServant(servant)));
         tableViewOrdinances.setPlaceholder(new Label("Nenhuma Portaria registrada"));
-
     }
 
     @FXML
