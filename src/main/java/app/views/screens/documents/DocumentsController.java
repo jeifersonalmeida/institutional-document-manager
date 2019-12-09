@@ -7,7 +7,6 @@ import app.models.Document.Status;
 import app.models.Ordinance.Ordinance;
 import app.models.Ordinance.OrdinanceDAO;
 import app.models.Ordinance.OrdinanceType;
-import app.models.TeachingProject.TeachingProject;
 import app.models.TeachingProject.TeachingProjectDAO;
 import app.models.utils.filter.DocumentTypeFilter;
 import app.models.utils.filter.DocumentOrderFilter;
@@ -18,7 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,7 +24,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -40,7 +37,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.awt.*;
 import java.io.*;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -74,7 +70,6 @@ public class DocumentsController {
     typeFilters.put("Comunicados", DocumentTypeFilter.ANNOUNCEMENT);
     typeFilters.put("Comissões", DocumentTypeFilter.COMMISSION);
     typeFilters.put("Projetos Institucionais", DocumentTypeFilter.INSTITUTIONAL_PROJECT);
-    typeFilters.put("Projetos de Ensino", DocumentTypeFilter.TEACHING_PROJECT);
 
     refresh();
 
@@ -346,11 +341,6 @@ public class DocumentsController {
             return true;
           }
           return false;
-        }
-        return false;
-      case TEACHING_PROJECT:
-        if(document instanceof TeachingProject){
-          return true;
         }
         return false;
       case ALL:

@@ -31,8 +31,7 @@ public class ChooseDocumentTypeController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     avaiableTypes.addAll(
         "Comunicado",
-        "Portaria",
-        "Projeto de Ensino");
+        "Portaria");
     sltChooseDocumentType.setItems(avaiableTypes);
     sltChooseDocumentType.setValue("Comunicado");
   }
@@ -62,11 +61,6 @@ public class ChooseDocumentTypeController implements Initializable {
         controller1.setDocumentsController(this.parent);
 
         newDocumentStage.setTitle("Nova Portaria");
-        break;
-      case "Projeto de Ensino":
-        newDocument = FXMLLoader.load(
-            getClass().getResource("/views/modals/newDocuments/teachingProject/TeachingProject.fxml"));
-        newDocumentStage.setTitle("Novo Projeto de Ensino");
         break;
     }
 
