@@ -52,11 +52,6 @@ public class SingleReportController {
 
     private PublicServant servant;
 
-    @FXML
-    private void initialize() {
-        fill();
-    }
-
     private ObservableList<Ordinance> loadValues() {
         ordinances.add(new Ordinance(Calendar.getInstance().getTime().toString(), Calendar.getInstance().getTime().toString(), 1.0, OrdinanceType.ORDINANCE, "PORTARIA Nº SCL.0001/2019, DE 07 DE JANEIRO DE 2019.\n" +
                 "Dispõe sobre substituição regulamentar de servidor - DAA"));
@@ -196,6 +191,8 @@ public class SingleReportController {
 
         textFieldRecord.setText(this.servant.getRecord());
         textFieldName.setText(this.servant.getName());
+
+        fill();
     }
 
     private double getTotalWorkload(){
